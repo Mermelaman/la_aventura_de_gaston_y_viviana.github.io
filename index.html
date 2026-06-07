@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gastón y Viviana: La Aventura de nuestras vidas</title>
+  <meta name="description" content="Una aventura épica te espera. ¿Aceptas la quest?">
+  <meta property="og:title" content="Gastón y Viviana: La Aventura de nuestras vidas">
+  <meta property="og:description" content="Has sido elegido para una quest legendaria. ¿Te atreves a descubrir el destino?">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=53">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+</head>
+<body>
+  <div id="device-container">
+    <!-- Game Screen (top/left) -->
+    <div id="game-container">
+      <div id="scene-container"></div>
+      <div id="ui-layer">
+        <div id="party-hud"></div>
+      </div>
+      <div id="transition-overlay"></div>
+      <div id="particles-container"></div>
+    </div>
+
+    <!-- Controls Area (bottom/right) -->
+    <div id="controls-area">
+      <div id="dialogue-box" class="hidden">
+        <div id="dialogue-portrait"></div>
+        <div id="dialogue-content">
+          <div id="dialogue-name"></div>
+          <div id="dialogue-text"></div>
+        </div>
+        <div id="dialogue-indicator">▼</div>
+      </div>
+      <button id="btn-a" class="game-btn" aria-label="Avanzar">A</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js?v=53"></script>
+</body>
+</html>

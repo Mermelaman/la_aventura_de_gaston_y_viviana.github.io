@@ -1,0 +1,293 @@
+// ============================================
+// CHARACTER DEFINITIONS
+// ============================================
+
+export const HERO_SPRITES = {
+  novio: {
+    idle: [
+      `....NNNNN.....`,
+      `...NNNNNNN....`,
+      `...NSSSSSN....`,
+      `...N@SSS@N....`,
+      `...NSSBSSN....`,
+      `..NNBBBBBN....`,
+      `...NBBBBB.....`,
+      `...TTTTTTT....`,
+      `..TTTTTGTTT...`,
+      `..TTTGGGTTT...`,
+      `...TTTTTTT....`,
+      `...DDDDDDD....`,
+      `...DDD.DDD....`,
+      `...DD...DD....`,
+      `...KK...KK....`,
+      `...WW...WW....`,
+    ],
+    palette: { 
+      N: '#111111', S: '#f1c27d', '@': '#000000', B: '#222222', 
+      T: '#1a1a1a', G: '#7f8c8d', D: '#2c3e50', K: '#000000', W: '#ffffff' 
+    },
+  },
+  novia: {
+    idle: [
+      `....CCCCCC....`,
+      `...CCCCCCCC...`,
+      `...NNNNNNNN...`,
+      `...NSSSSSSN...`,
+      `...N@SSSS@N...`,
+      `...NSSSSSSN...`,
+      `...NNSSSSNN...`,
+      `...NEEEEEEH...`,
+      `..HHEEEEEEHH..`,
+      `..HHEEBEEEHH..`,
+      `..HHEBBBE.HH..`,
+      `...EEEEEEEE...`,
+      `...SSSSSSSS...`,
+      `...SSS..SSS...`,
+      `...SS....SS...`,
+      `...KK....KK...`,
+    ],
+    palette: { 
+      C: '#222222', N: '#111111', H: '#111111', S: '#e0b298', 
+      '@': '#000000', E: '#95a5a6', B: '#8b4513', K: '#333333' 
+    },
+  },
+};
+
+export const ALLY_SPRITES = {
+  valentina: {
+    idle: [
+      `...CCCCCC...`,
+      `..CCCCCCCC..`,
+      `..CSSSSSSC..`,
+      `..C@SSSS@C..`,
+      `..CSSSSSSC..`,
+      `..CCCCCCCC..`,
+      `.CC.GGGGGG..`,
+      `.CCGGGGGGCC.`,
+      `.CCGGBBGGCC.`,
+      `.CC.GGGGCC..`,
+      `..C.GG.GCC..`,
+      `....LL..L...`,
+      `....LL..L...`,
+    ],
+    palette: { C: '#4a2311', S: '#fcdcb8', '@': '#000000', G: '#27ae60', B: '#8B4513', L: '#555555' },
+  },
+  margarita: {
+    idle: [
+      `...NNNNNN...`,
+      `..NNNNNNNN..`,
+      `..NSSSSSSN..`,
+      `..N@SSSS@N..`,
+      `..NSSSSSSN..`,
+      `...NNNNNN...`,
+      `...RRRRRR...`,
+      `..RRRRRRRR..`,
+      `..RRWWWWRR..`,
+      `...RRRRRR...`,
+      `...RR..RR...`,
+      `...DD..DD...`,
+      `...DD..DD...`,
+    ],
+    palette: { N: '#111111', S: '#d4a373', '@': '#000000', R: '#e74c3c', W: '#ecf0f1', DD: '#2c3e50', D: '#2c3e50' },
+  },
+  gatos: {
+    idle: [
+      `...^^...^^..`,
+      `...NN...NN..`,
+      `..NNN..NNN..`,
+      `.NWNWWNNWNN.`,
+      `.N@W@NN@W@N.`,
+      `.NWWWNNWWWN.`,
+      `..NNN..NNN..`,
+      `...WW...WW..`,
+      `.WWWW.WWWW..`,
+      `.WNNW.WNNW..`,
+      `..WW...WW...`,
+      `............`,
+    ],
+    palette: { N: '#222222', W: '#ffffff', '@': '#f1c40f', '^': '#222222' },
+  },
+};
+
+export const ENEMY_SPRITES = {
+  helado: {
+    idle: [
+      `....MMMM....`,
+      `...MMMMMM...`,
+      `..MMNMMNMM..`,
+      `..MMMMMMMM..`,
+      `..NMMMMNMM..`,
+      `...MMNMMM...`,
+      `....WWWW....`,
+      `....WBBW....`,
+      `....WBBW....`,
+      `.....WW.....`,
+      `............`,
+      `............`,
+      `............`,
+    ],
+    palette: { M: '#55efc4', N: '#2d3436', W: '#ffeaa7', B: '#e17055' },
+  },
+  hospital: {
+    idle: [
+      `..WWWWWWWW..`,
+      `..WWWWWWWW..`,
+      `..WBBWWBWW..`,
+      `..WWWWWWWW..`,
+      `..WBBWWBWW..`,
+      `..WWWWWWWW..`,
+      `..WWWWWWWW..`,
+      `..WWWRRWWW..`,
+      `..WWWRRWWW..`,
+      `..WWWWWWWW..`,
+      `..WWWWWWWW..`,
+      `............`,
+      `............`,
+    ],
+    palette: { W: '#ecf0f1', B: '#3498db', R: '#e74c3c' },
+  },
+  militar: {
+    idle: [
+      `..GGGGGGGG..`,
+      `..GGGGGGGG..`,
+      `..GYYGGYYG..`,
+      `..GGGGGGGG..`,
+      `..GYYGGYYG..`,
+      `..GGGGGGGG..`,
+      `..GGGGGGGG..`,
+      `..GGGDDGGG..`,
+      `..GGGDDGGG..`,
+      `..GGGGGGGG..`,
+      `..GGGGGGGG..`,
+      `............`,
+      `............`,
+    ],
+    palette: { G: '#2d5a27', Y: '#f1c40f', D: '#1a3a1f' },
+  },
+  gato: {
+    idle: [
+      `............`,
+      `............`,
+      `....^..^....`,
+      `....NNNN....`,
+      `...NWWWWN...`,
+      `...N@WW@N...`,
+      `...NWWWWN...`,
+      `....NNNN....`,
+      `...WWWWWW...`,
+      `...WNNNNW...`,
+      `....WWWW....`,
+      `............`,
+      `............`,
+    ],
+    palette: { N: '#222222', W: '#ffffff', '@': '#e74c3c', '^': '#222222' },
+  },
+  cerezo: {
+    idle: [
+      `...PPPPP....`,
+      `..PPPPPPP...`,
+      `.PPPPPPPPP..`,
+      `.PPPPP@PPP..`,
+      `..PPPPPPP...`,
+      `...PPPPP....`,
+      `....BBB.....`,
+      `....BBB.....`,
+      `....BBB.....`,
+      `....BBB.....`,
+      `...BBBBB....`,
+    ],
+    palette: { P: '#fd79a8', B: '#8B4513', '@': '#000000' },
+  },
+};
+
+export const HEROES = [
+  {
+    id: 'novio',
+    name: 'Gastón',
+    className: 'Bárbaro Cocinero',
+    emoji: '🍳',
+    description: 'Guerrero de la cocina. Pelo largo y barba.',
+    stats: { Valor: 9, Sazón: 10, Amor: 8 },
+    attackMessages: [
+      '¡{name} ataca con una sartén ardiente!',
+      '¡{name} lanza un guiso picante al enemigo!',
+      '¡{name} usa el poder del morfi!'
+    ],
+    sprite: HERO_SPRITES.novio,
+    imageUrl: 'assets/gaston.png',
+    color: '#e74c3c',
+  },
+  {
+    id: 'novia',
+    name: 'Viviana',
+    className: 'Alquimista Cromática',
+    emoji: '✨',
+    description: 'Sabia hechicera del orden y la alquimia.',
+    stats: { Magia: 10, Amor: 9, Paciencia: 8 },
+    attackMessages: [
+      '¡{name} conjura un hechizo de alquimia pura!',
+      '¡{name} usa magia de limpieza profunda!',
+      '¡{name} desata un rayo de orden cósmico!'
+    ],
+    sprite: HERO_SPRITES.novia,
+    imageUrl: 'assets/viviana.png',
+    scale: 0.9,
+    color: '#9b59b6',
+  },
+];
+
+export const ALLIES = [
+  {
+    id: 'valentina',
+    name: 'Valentina',
+    className: 'Druida y ama de las bestias',
+    emoji: '🦁',
+    description: 'Druida y ama de las bestias.',
+    attackMessages: [
+      '¡{name} invoca a una bestia salvaje!',
+      '¡{name} da un latigazo feroz!',
+      '¡{name} lidera el ataque animal!'
+    ],
+    sprite: ALLY_SPRITES.valentina,
+    imageUrl: 'assets/valentina.png',
+    scale: 0.8,
+    color: '#27ae60',
+    joinChapter: 2,
+    joinMessage: '¡Valentina se ha unido a la aventura!',
+  },
+  {
+    id: 'margarita',
+    name: 'Margarita',
+    className: 'Pícara Berserker',
+    emoji: '🤸‍♀️',
+    description: 'Pícara berserker.',
+    attackMessages: [
+      '¡{name} hace una pirueta destructiva!',
+      '¡{name} aplica fuerza bruta sin piedad!',
+      '¡{name} salta y aplasta al enemigo!'
+    ],
+    sprite: ALLY_SPRITES.margarita,
+    imageUrl: 'assets/margarita.png',
+    scale: 0.8,
+    color: '#e67e22',
+    joinChapter: 3,
+    joinMessage: '¡Margarita se ha unido a la aventura!',
+  },
+  {
+    id: 'gatos',
+    name: 'Multigatos',
+    className: 'Conglomerado de Gatos',
+    emoji: '🐈',
+    description: 'Un enjambre de michis coordinados.',
+    attackMessages: [
+      '¡La horda de gatos araña furiosamente!',
+      '¡Un michi salta directo a la cara del enemigo!',
+      '¡El Rey Gato maúlla y aturde a todos!'
+    ],
+    sprite: ALLY_SPRITES.gatos,
+    imageUrl: 'assets/gatos.png',
+    color: '#f1c40f',
+    joinChapter: 4,
+    joinMessage: '¡Multigatos se ha unido a la aventura!',
+  },
+];
