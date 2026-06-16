@@ -240,19 +240,13 @@ class AudioEngine {
       this.masterGain.connect(this.ctx.destination);
       this.initialized = true;
     } catch (e) {
-      console.warn('Web Audio API not supported', e);
-      this.initialized = false;
-      this.ctx = null;
+      console.warn('Web Audio API not supported');
     }
   }
 
   resume() {
-    try {
-      if (this.ctx && this.ctx.state === 'suspended') {
-        this.ctx.resume();
-      }
-    } catch (e) {
-      console.warn('Audio context resume failed', e);
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
     }
   }
 
@@ -278,7 +272,7 @@ class AudioEngine {
         };
       }
     } catch (e) {
-      console.warn('Error playing note:', e);
+      console.error('Error playing note:', e);
     }
   }
 
@@ -293,13 +287,12 @@ class AudioEngine {
       this.resume();
       this._scheduleMelody(melody);
     } catch (e) {
-      console.warn('Error playing melody:', e);
+      console.error('Error playing melody:', e);
     }
   }
 
   _scheduleMelody(melody) {
     try {
-      if (!this.ctx) return;
       const beatDuration = 60 / melody.bpm;
       let time = this.ctx.currentTime + 0.1;
       for (const note of melody.notes) {
@@ -311,38 +304,30 @@ class AudioEngine {
       const totalDuration = melody.notes.reduce((s, n) => s + n.d, 0) * beatDuration;
       if (melody.loop && this.isPlaying) {
         this.melodyTimeout = setTimeout(() => {
-          try {
-            if (this.isPlaying && this.currentMelody) {
-              this._scheduleMelody(melody);
-            }
-          } catch (e) {
-            console.warn('Error inside loop scheduleMelody:', e);
+          if (this.isPlaying && this.currentMelody) {
+            this._scheduleMelody(melody);
           }
         }, totalDuration * 1000);
       }
     } catch (e) {
-      console.warn('Error scheduling melody:', e);
+      console.error('Error scheduling melody:', e);
     }
   }
 
   stopMelody() {
-    try {
-      this.isPlaying = false;
-      this.currentMelody = null;
-      if (this.melodyTimeout) {
-        clearTimeout(this.melodyTimeout);
-        this.melodyTimeout = null;
-      }
-      this.activeOscillators.forEach(osc => {
-        try { 
-          osc.stop(); 
-          osc.disconnect(); 
-        } catch(e) {}
-      });
-      this.activeOscillators = [];
-    } catch (e) {
-      console.warn('Error stopping melody:', e);
+    this.isPlaying = false;
+    this.currentMelody = null;
+    if (this.melodyTimeout) {
+      clearTimeout(this.melodyTimeout);
+      this.melodyTimeout = null;
     }
+    this.activeOscillators.forEach(osc => {
+      try { 
+        osc.stop(); 
+        osc.disconnect(); 
+      } catch(e) {}
+    });
+    this.activeOscillators = [];
   }
 
   // Sound Effects
@@ -389,38 +374,25 @@ class AudioEngine {
           break;
       }
     } catch (e) {
-      console.warn('Error playing SFX:', e);
+      console.error('Error playing SFX:', e);
     }
   }
 
   toggleMute() {
-    try {
-      this.muted = !this.muted;
-      if (this.masterGain) {
-        this.masterGain.gain.value = this.muted ? 0 : 0.15;
-      }
-      return this.muted;
-    } catch (e) {
-      console.warn('Error toggling mute:', e);
-      return this.muted;
+    this.muted = !this.muted;
+    if (this.masterGain) {
+      this.masterGain.gain.value = this.muted ? 0 : 0.15;
     }
+    return this.muted;
   }
 
   fadeOut(duration = 1) {
-    try {
-      if (!this.masterGain || !this.ctx) return;
-      this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + duration);
-      setTimeout(() => {
-        try {
-          this.stopMelody();
-          if (this.masterGain) {
-            this.masterGain.gain.value = this.muted ? 0 : 0.15;
-          }
-        } catch(e) {}
-      }, duration * 1000);
-    } catch (e) {
-      console.warn('Error in fadeOut:', e);
-    }
+    if (!this.masterGain) return;
+    this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + duration);
+    setTimeout(() => {
+      this.stopMelody();
+      this.masterGain.gain.value = this.muted ? 0 : 0.15;
+    }, duration * 1000);
   }
 }
 

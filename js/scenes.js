@@ -50,8 +50,8 @@ export class TitleScene {
     content.innerHTML = `
       <div class="title-stars" aria-hidden="true"></div>
       <div class="title-main">
-        <h1 class="title-names">Gastón y Viviana</h1>
-        <div class="title-game">La Aventura de nuestras vidas</div>
+        <h1 class="title-names">Fantasy Life</h1>
+        <div class="title-game">La aventura de Gastón y Viviana</div>
       </div>
       <div class="title-prompt blink">▼ Presiona A para comenzar ▼</div>
     `;
@@ -113,13 +113,13 @@ export class SelectScene {
         if (hero.imageUrl) {
           const img = createEl('img');
           img.src = hero.imageUrl;
-          img.style.width = '140px';
+          img.style.width = '95px';
           img.style.height = 'auto';
           img.style.imageRendering = 'pixelated';
           if (hero.scale) img.style.transform = `scale(${hero.scale})`;
           spriteWrap.appendChild(img);
         } else if (hero.sprite) {
-          const canvas = renderSprite(hero.sprite.idle, hero.sprite.palette, 8);
+          const canvas = renderSprite(hero.sprite.idle, hero.sprite.palette, 5.5);
           spriteWrap.appendChild(canvas);
         }
         card.appendChild(spriteWrap);
@@ -179,12 +179,12 @@ export class SelectScene {
     if (hero.imageUrl) {
       const img = createEl('img');
       img.src = hero.imageUrl;
-      img.style.width = '200px';
+      img.style.width = '140px';
       img.style.height = 'auto';
       img.style.imageRendering = 'pixelated';
       spriteEl.appendChild(img);
     } else if (hero.sprite) {
-      spriteEl.appendChild(renderSprite(hero.sprite.idle, hero.sprite.palette, 6));
+      spriteEl.appendChild(renderSprite(hero.sprite.idle, hero.sprite.palette, 4.5));
     }
     container.appendChild(overlay);
     await fadeIn(overlay, 500);
@@ -254,6 +254,29 @@ export class ChapterScene {
       return orderA - orderB;
     });
 
+    // Dynamic height and scale factor based on the number of active party members:
+    let maxHeight = 200;
+    let vhHeight = 22;
+    let canvasFactor = 5;
+    
+    if (activeMembers.length === 1) {
+      maxHeight = 240;
+      vhHeight = 26;
+      canvasFactor = 6.2;
+    } else if (activeMembers.length === 2) {
+      maxHeight = 200;
+      vhHeight = 22;
+      canvasFactor = 5;
+    } else if (activeMembers.length === 3) {
+      maxHeight = 160;
+      vhHeight = 18;
+      canvasFactor = 4;
+    } else if (activeMembers.length >= 4) {
+      maxHeight = 120;
+      vhHeight = 14;
+      canvasFactor = 3;
+    }
+
     for (const member of activeMembers) {
       const memberDiv = createEl('div', 'party-member-scene');
       
@@ -269,9 +292,9 @@ export class ChapterScene {
       
       if (member.imageUrl) {
         const img = createEl('img');
-        img.src = member.imageUrl + '?v=51';
-        img.style.height = 'clamp(80px, 22vh, 200px)';
-        img.style.maxHeight = '200px';
+        img.src = member.imageUrl + '?v=53';
+        img.style.height = `clamp(80px, ${vhHeight}vh, ${maxHeight}px)`;
+        img.style.maxHeight = `${maxHeight}px`;
         img.style.width = 'auto';
         img.style.imageRendering = 'pixelated';
         img.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))';
@@ -279,7 +302,7 @@ export class ChapterScene {
         img.style.transform = transformStr;
         memberDiv.appendChild(img);
       } else if (member.sprite) {
-        const memberSprite = renderSprite(member.sprite.idle, member.sprite.palette, 5);
+        const memberSprite = renderSprite(member.sprite.idle, member.sprite.palette, canvasFactor);
         memberSprite.style.transform = transformStr;
         memberDiv.appendChild(memberSprite);
       }
@@ -297,7 +320,7 @@ export class ChapterScene {
     let eventImageEl = null;
     if (this.chapter.image) {
       eventImageEl = createEl('img', 'chapter-event-image');
-      eventImageEl.src = this.chapter.image + '?v=51';
+      eventImageEl.src = this.chapter.image + '?v=53';
       eventImageEl.style.position = 'absolute';
       eventImageEl.style.top = '10%';
       eventImageEl.style.left = '15%';
