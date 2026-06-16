@@ -269,7 +269,7 @@ export class ChapterScene {
       
       if (member.imageUrl) {
         const img = createEl('img');
-        img.src = member.imageUrl + '?v=51';
+        img.src = member.imageUrl + '?v=53';
         img.style.height = 'clamp(80px, 22vh, 200px)';
         img.style.maxHeight = '200px';
         img.style.width = 'auto';
@@ -297,7 +297,7 @@ export class ChapterScene {
     let eventImageEl = null;
     if (this.chapter.image) {
       eventImageEl = createEl('img', 'chapter-event-image');
-      eventImageEl.src = this.chapter.image + '?v=51';
+      eventImageEl.src = this.chapter.image + '?v=53';
       eventImageEl.style.position = 'absolute';
       eventImageEl.style.top = '10%';
       eventImageEl.style.left = '15%';
@@ -554,9 +554,29 @@ export class FinaleScene {
       </div>
       <div class="inv-divider">─── ♡ ───</div>
       <div class="inv-ceremony">${CONFIG.wedding.ceremony}</div>
+      <button id="btn-gifts" class="inv-gifts-btn">🎁 Sugerencia de Regalos</button>
     `;
     container.appendChild(invitation);
     await fadeIn(invitation, 1000);
+
+    // Wire up gifts button click listener
+    const btnGifts = document.getElementById('btn-gifts');
+    const giftsOverlay = document.getElementById('gifts-overlay');
+    const btnCloseGifts = document.getElementById('btn-close-gifts');
+
+    if (btnGifts && giftsOverlay && btnCloseGifts) {
+      btnGifts.addEventListener('click', (e) => {
+        e.stopPropagation();
+        giftsOverlay.classList.remove('hidden');
+        giftsOverlay.classList.add('visible');
+      });
+
+      btnCloseGifts.addEventListener('click', (e) => {
+        e.stopPropagation();
+        giftsOverlay.classList.remove('visible');
+        giftsOverlay.classList.add('hidden');
+      });
+    }
 
     // Wait for A to continue
     await dialogue.showText('▼ Presiona A para continuar ▼');

@@ -35,6 +35,70 @@ class Game {
     dialogue.init();
     particles.init();
 
+    // ---- MOBILE ORIENTATION CHECK & LOCK ----
+    const checkOrientation = () => {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+        || window.innerWidth <= 1024;
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const overlay = document.getElementById('orientation-overlay');
+      if (overlay) {
+        if (isMobile && isPortrait) {
+          overlay.classList.add('visible');
+          overlay.classList.remove('hidden');
+        } else {
+          overlay.classList.remove('visible');
+          overlay.classList.add('hidden');
+        }
+      }
+    };
+
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    checkOrientation();
+
+    const btnLock = document.getElementById('btn-lock-orientation');
+    if (btnLock) {
+      btnLock.addEventListener('click', async () => {
+        try {
+          const docEl = document.documentElement;
+          if (docEl.requestFullscreen) {
+            await docEl.requestFullscreen();
+          } else if (docEl.webkitRequestFullscreen) {
+            await docEl.webkitRequestFullscreen();
+          } else if (docEl.msRequestFullscreen) {
+            await docEl.msRequestFullscreen();
+          }
+          if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock('landscape');
+          }
+        } catch (err) {
+          console.warn("No se pudo bloquear la orientación:", err);
+        }
+      });
+    }
+
+    // ---- BACKGROUND PAUSING TRIGGER ----
+    const pausedOverlay = document.getElementById('paused-overlay');
+    if (pausedOverlay) {
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          pausedOverlay.classList.add('visible');
+          pausedOverlay.classList.remove('hidden');
+          if (audio.ctx && audio.ctx.state !== 'suspended') {
+            audio.ctx.suspend();
+          }
+        }
+      });
+
+      pausedOverlay.addEventListener('click', () => {
+        pausedOverlay.classList.remove('visible');
+        pausedOverlay.classList.add('hidden');
+        if (audio.ctx && audio.ctx.state === 'suspended') {
+          audio.ctx.resume();
+        }
+      });
+    }
+
     // ---- BUTTON A INPUT ----
     const btnA = document.getElementById('btn-a');
     const handleA = () => {

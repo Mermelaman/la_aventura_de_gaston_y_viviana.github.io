@@ -65,7 +65,7 @@ class BattleEngine {
       if (enemy.id === 'cerezo') {
         img.classList.add('cerezo-boss');
       }
-      img.src = enemy.imageUrl + '?v=38';
+      img.src = enemy.imageUrl + '?v=53';
       // Use height instead of width for enemy
       img.style.height = 'clamp(80px, 22vh, 180px)';
       img.style.maxHeight = '180px';
@@ -111,9 +111,10 @@ class BattleEngine {
 
     // Hero
     const heroWrap = createEl('div', 'battle-sprite');
+    heroWrap.id = `battle-char-${hero.id}`;
     if (hero && hero.imageUrl) {
       const img = createEl('img', 'battle-image');
-      img.src = hero.imageUrl + '?v=38';
+      img.src = hero.imageUrl + '?v=53';
       // Use height instead of width so aspect ratio doesn't distort relative sizes
       img.style.height = 'clamp(70px, 18vh, 150px)';
       img.style.maxHeight = '150px';
@@ -149,10 +150,11 @@ class BattleEngine {
     // Party members
     party.forEach(member => {
       const memWrap = createEl('div', 'battle-sprite');
+      memWrap.id = `battle-char-${member.id}`;
       memWrap.style.transformOrigin = 'bottom';
       if (member.imageUrl) {
         const img = createEl('img', 'battle-image');
-        img.src = member.imageUrl + '?v=38';
+        img.src = member.imageUrl + '?v=53';
         img.style.height = 'clamp(70px, 18vh, 150px)';
         img.style.maxHeight = '150px';
         img.style.width = 'auto';
@@ -244,16 +246,37 @@ class BattleEngine {
 
     // Apply damage
     if (turnData.turn === 'player') {
-      if (this.levelData.enemy && this.levelData.enemy.id === 'cerezo') {
-        this.shootHeart();
-        await wait(500);
-      }
+      const playerEl = document.getElementById('battle-player-entity');
+      const enemyEl = document.getElementById('battle-enemy-entity');
+      const actorEl = document.getElementById('battle-char-' + actor.id) || playerEl;
+
+      const isCerezo = this.levelData.enemy && this.levelData.enemy.id === 'cerezo';
+      const rawEmoji = actor.projEmoji || actor.emoji || '⚔️';
+      const projEmoji = isCerezo ? '❤️' : (Array.isArray(rawEmoji) ? rawEmoji[Math.floor(Math.random() * rawEmoji.length)] : rawEmoji);
+      const projColor = isCerezo ? '#fd79a8' : (actor.color || '#fff');
+
+      this.shootProjectile(actorEl, enemyEl, projEmoji, projColor);
+      await wait(500);
+
       this.enemyHP = Math.max(0, this.enemyHP - turnData.damage);
       this.updateHP('enemy');
       this.flashEntity('battle-enemy-entity');
     } else {
+      const enemyEl = document.getElementById('battle-enemy-entity');
+      const playerEl = document.getElementById('battle-player-entity');
+      const targetEl = document.getElementById('battle-char-' + actor.id) || playerEl;
+      const enemy = this.levelData.enemy;
+      if (enemy && enemyEl && targetEl) {
+        const projEmoji = enemy.projEmoji || enemy.emoji || '👾';
+        const projColor = enemy.color || '#fff';
+
+        this.shootProjectile(enemyEl, targetEl, projEmoji, projColor);
+        await wait(500);
+      }
+
       // Player takes damage (scripted, no actual HP tracking)
-      this.flashEntity('battle-player-entity');
+      const hitElId = document.getElementById('battle-char-' + actor.id) ? ('battle-char-' + actor.id) : 'battle-player-entity';
+      this.flashEntity(hitElId);
     }
 
     await wait(500);
@@ -269,43 +292,41 @@ class BattleEngine {
     }
   }
 
-  shootHeart() {
-    const playerEl = document.getElementById('battle-player-entity');
-    const enemyEl = document.getElementById('battle-enemy-entity');
-    if (!playerEl || !enemyEl || !this.battleArea) return;
+  shootProjectile(fromEl, toEl, char, color) {
+    if (!fromEl || !toEl || !this.battleArea) return;
     
-    const heart = createEl('div', 'battle-heart', '❤️');
-    heart.style.position = 'absolute';
-    heart.style.fontSize = '32px';
-    heart.style.zIndex = '100';
-    heart.style.pointerEvents = 'none';
-    heart.style.filter = 'drop-shadow(0 0 10px rgba(232,67,147,0.8))';
+    const proj = createEl('div', 'battle-projectile', char);
+    proj.style.position = 'absolute';
+    proj.style.fontSize = '32px';
+    proj.style.zIndex = '100';
+    proj.style.pointerEvents = 'none';
+    proj.style.filter = `drop-shadow(0 0 10px ${color})`;
     
-    const pRect = playerEl.getBoundingClientRect();
-    const eRect = enemyEl.getBoundingClientRect();
+    const fromRect = fromEl.getBoundingClientRect();
+    const toRect = toEl.getBoundingClientRect();
     const containerRect = this.battleArea.getBoundingClientRect();
     
-    const startX = pRect.left + pRect.width / 2 - containerRect.left - 16;
-    const startY = pRect.top + pRect.height / 2 - containerRect.top - 16;
-    const endX = eRect.left + eRect.width / 2 - containerRect.left - 16;
-    const endY = eRect.top + eRect.height / 2 - containerRect.top - 16;
+    const startX = fromRect.left + fromRect.width / 2 - containerRect.left - 16;
+    const startY = fromRect.top + fromRect.height / 2 - containerRect.top - 16;
+    const endX = toRect.left + toRect.width / 2 - containerRect.left - 16;
+    const endY = toRect.top + toRect.height / 2 - containerRect.top - 16;
     
-    heart.style.left = `${startX}px`;
-    heart.style.top = `${startY}px`;
-    heart.style.transition = 'all 0.5s ease-in-out';
+    proj.style.left = `${startX}px`;
+    proj.style.top = `${startY}px`;
+    proj.style.transition = 'all 0.5s ease-in-out';
     
-    this.battleArea.appendChild(heart);
+    this.battleArea.appendChild(proj);
     
     // trigger reflow
-    void heart.offsetWidth;
+    void proj.offsetWidth;
     
-    heart.style.left = `${endX}px`;
-    heart.style.top = `${endY}px`;
-    heart.style.transform = 'scale(2.5)';
-    heart.style.opacity = '0';
+    proj.style.left = `${endX}px`;
+    proj.style.top = `${endY}px`;
+    proj.style.transform = 'scale(2.5)';
+    proj.style.opacity = '0';
     
     setTimeout(() => {
-      if (heart.parentNode) heart.remove();
+      if (proj.parentNode) proj.remove();
     }, 500);
   }
 

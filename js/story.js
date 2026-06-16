@@ -1,26 +1,26 @@
 export const STORY = {
   chapters: [
-    // ── Chapter 1: Peor que un hombre lobo es la menta granizada ───
+    // ── Chapter 1: Cap. 1: Paseo la plaza ───
     {
       num: 1,
-      title: 'Peor que un hombre lobo es la menta granizada',
+      title: 'Cap. 1: Paseo la plaza',
       bgClass: 'bg-plaza',
       melody: 'twist',
       particleType: 'snow',
       introDialogues: [
-        { name: 'Narrador', text: 'Un paseo tranquilo por la plaza...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'El aire estaba fresco, todo parecía normal.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Hasta que un Helado de Menta Granizada salvaje apareció!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Todo comienza cuando los aventureros Viviana y Gastón son convocados en la taberna para héroes "Paseo La Plaza" para combatir hombres lobo...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '...pero de un momento a otro fueron atacados por un demonio mentolado helado!', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Un Helado de Menta Granizada salvaje apareció!', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'menta', name: 'Menta Granizada', emoji: '🍦', spriteId: 'helado', hp: 30, maxHp: 30, color: '#55efc4', imageUrl: 'assets/menta.png' },
+      enemy: { id: 'menta', name: 'Menta Granizada', emoji: '🍦', spriteId: 'helado', hp: 30, maxHp: 30, color: '#55efc4', projEmoji: '❄️', imageUrl: 'assets/menta.png' },
       battleScript: [
         { turn: 'player', text: { novio: '¡Gastón ataca con una servilleta!', novia: '¡Viviana usa alquimia de servilletas!' }, damage: 15 },
         { turn: 'enemy', text: 'El helado te congela la mano.', damage: 5 },
         { turn: 'player', text: { novio: '¡Gastón lanza un mordisco crítico de amor!', novia: '¡Viviana da un beso congelante crítico!' }, damage: 15 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: '¡El helado fue devorado!', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Y tu otra mitad aparece para compartir el postre!', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡El helado fue devorado con gran valentía!', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Y desde ese momento comenzaron la party de sus vidas.', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Primera cita y hombres lobo ✨', portrait: '✨', color: '#e17055', textColor: '#e17055' }
       ],
@@ -30,27 +30,28 @@ export const STORY = {
       ]
     },
 
-    // ── Chapter 2: Atacando al system ──────────────────────────────
+    // ── Chapter 2: Cap. 2: Ataca el System ──────────────────────────────
     {
       num: 2,
-      title: 'Atacando al system',
+      title: 'Cap. 2: Ataca el System',
       bgClass: 'bg-plaza',
       melody: 'system',
       particleType: 'sparkle',
       introDialogues: [
-        { name: 'Narrador', text: 'Llegaron al recital de System of a Down.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'La música suena fuerte, la multitud salta.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡BANANA BANANA BANANA PIE!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Viviana, la alquimista cromática y Gastón el bárbaro cocinero se encuentran en la fortaleza de G\'BA, en la búsqueda del gran Banana Terracota Pie.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'El cielo se vuelve escarlata, unos seres oscuros comienzan a correr en círculos, entonan cánticos arcanos...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '...y formando un remolino que abre el portal del Gran Terracota Pie!', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'banana', name: 'Banana Pie', emoji: '🍌', spriteId: 'banana', hp: 40, maxHp: 40, color: '#ffd700', imageUrl: 'assets/banana.png' },
+      enemy: { id: 'banana', name: 'Banana Pie', emoji: '🍌', spriteId: 'banana', hp: 40, maxHp: 40, color: '#ffd700', projEmoji: '🍌', imageUrl: 'assets/banana.png' },
       battleScript: [
         { turn: 'player', text: { novio: '¡Gastón ataca con un pogo extremo!', novia: '¡Viviana hace headbanging mágico!' }, damage: 20 },
         { turn: 'enemy', text: 'La Banana te tira relleno caliente.', damage: 10 },
-        { turn: 'player', text: { novio: '¡Gastón grita el estribillo perfecto!', novia: '¡Viviana canta una nota aguda destructiva!' }, damage: 20 }
+        { turn: 'player', text: { novio: '¡Gastón grita el estribillo perfecto!', novia: '¡Viviana canta una nota agua destructiva!' }, damage: 20 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'La Banana Pie explotó en mil pedazos.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡La multitud enloquece!', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'La batalla fue dura pero nuestros héroes lograron prevalecer.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Ahora más fortalecidos, el Gran Terracota Pie los premia con las melodías de un encantamiento místico de protección dual...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '...ya que el verdadero amor está en la lucha conjunta para no caer en el sistema de la oscuridad.', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Banana terracota pie ✨', portrait: '✨', color: '#fdcb6e', textColor: '#fdcb6e' }
       ],
@@ -58,27 +59,28 @@ export const STORY = {
       allyDialogues: null
     },
 
-    // ── Chapter 3: Los vampiros de Zar'Ate ──────────────────────────
+    // ── Chapter 3: Cap. 3: Vampiros de Zar'Ate ──────────────────────────
     {
       num: 3,
-      title: "Los vampiros de Zar'Ate",
+      title: 'Cap. 3: Vampiros de Zar\'Ate',
       bgClass: 'bg-tablada',
       melody: 'cotton',
       particleType: 'mosquitos',
       introDialogues: [
-        { name: 'Narrador', text: 'El barco abandonado parecía una gran idea para explorar...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'Pero el zumbido se hizo cada vez más fuerte.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Un Mosquito Gigante bloquea el camino!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Mientras Viviana y Gastón planeaban sus próximas hazañas escucharon los rumores de unas criaturas enormes, longevas y que bebían sangre humana, cruzando el puente flotante de Zar\'Ate.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'De inmediato se lanzaron a la aventura, viajaron durante días, hasta que llegaron a un barco abandonado e ingresaron caminando por tablas de madera crujientes y delgadas.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Apenas pisaron al interior del barco escucharon zumbidos fuertes que les impedían oír algo más...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Notaron que en realidad no eran vampiros, sino algo más aterrador: mosquitos gigantes, adaptados para vivir de los campistas!', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'mosquito', name: 'Mosquito Gigante', emoji: '🦟', spriteId: 'mosquito', hp: 50, maxHp: 50, color: '#888', imageUrl: 'assets/mosquito.png' },
+      enemy: { id: 'mosquito', name: 'Mosquito Gigante', emoji: '🦟', spriteId: 'mosquito', hp: 50, maxHp: 50, color: '#888', projEmoji: '🦟', imageUrl: 'assets/mosquito.png' },
       battleScript: [
         { turn: 'player', text: { novio: '¡Gastón ataca con repelente vencido!', novia: '¡Viviana invoca un escudo anti-insectos!' }, damage: 20 },
         { turn: 'enemy', text: 'El Mosquito te pica el tobillo.', damage: 15 },
         { turn: 'player', text: { novio: '¡Gastón da un golpe de revista enrollada!', novia: '¡Viviana lanza un hechizo atrapa-moscas!' }, damage: 30 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'El Mosquito se fue volando mareado.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'La exploración del barco fue un éxito.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Luego de una batalla ardua los vencieron...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '...¡y consolidaron su party!', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ El primer viaje ✨', portrait: '✨', color: '#00b894', textColor: '#00b894' }
       ],
@@ -86,28 +88,27 @@ export const STORY = {
       allyDialogues: null
     },
 
-    // ── Chapter 4: La base en Ram'Os ─────────────────────────────
+    // ── Chapter 4: Cap. 4: Base en Ra’mos ─────────────────────────────
     {
       num: 4,
-      title: 'La base en Ram\'Os',
+      title: 'Cap. 4: Base en Ra\'mos',
       bgClass: 'bg-tablada',
       melody: 'vidaloca',
       particleType: 'limpieza',
       introDialogues: [
-        { name: 'Narrador', text: 'Al llegar, el desorden absoluto era tal que dio nacimiento al mismísimo Golem de Limpieza.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Debemos vencerlo si queremos poder habitar nuestra nueva base!', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡A sacar las escobas y los trapos!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Después de varias travesías juntos, Viviana y Gastón deciden que lo más conveniente era tener una base, donde puedan reunirse, planificar nuevas aventuras y recuperarse de hazañas fallidas.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Luego de una ardua búsqueda encuentran un refugio en lo alto de un roble añoso, que se encontraba en la región de Ram\'Os.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Y como todo tiene un costo, para poder vivir allí debían vencer al demonio del desorden y la suciedad.', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'golem', name: 'Golem de Limpieza', emoji: '🧹', spriteId: 'golem', hp: 45, maxHp: 45, color: '#8b4513', imageUrl: 'assets/limpieza.png' },
+      enemy: { id: 'golem', name: 'Golem de Limpieza', emoji: '🧹', spriteId: 'golem', hp: 45, maxHp: 45, color: '#8b4513', projEmoji: '🧹', imageUrl: 'assets/limpieza.png' },
       battleScript: [
         { turn: 'player', text: { novio: '¡Gastón ataca con la escoba vieja!', novia: '¡Viviana hace levitar los trapos!' }, damage: 25 },
-        { turn: 'enemy', text: 'El Golem lanza un splash tóxico de mugre.', damage: 10 },
-        { turn: 'player', text: { novio: '¡Gastón le tira agua limpia y se derrite!', novia: '¡Viviana purifica el Golem con luz estelar!' }, damage: 20 }
+        { turn: 'enemy', text: 'El Golem lanza un splash de suciedad.', damage: 10 },
+        { turn: 'player', text: { novio: '¡Gastón le tira agua limpia y se derrite!', novia: '¡Viviana purifica con luz estelar!' }, damage: 20 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: '¡El Golem fue purificado y la base en Ram\'Os es finalmente habitable!', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'Aunque un poco de esa maldición del desorden siempre quedará flotando en el aire...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡El fantasma del desorden los seguirá por siempre!', portrait: '👻', color: '#e17055' },
+        { name: 'Narrador', text: 'Después de una ardua pelea lo lograron vencer, pero no del todo...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '...pasó a ser un ente pegado a Viviana y Gastón, haciendo de las suyas para que nunca olvidemos al ahora llamado fantasma del desorden.', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Nuestra primera casita ✨', portrait: '✨', color: '#fd79a8', textColor: '#fd79a8' }
       ],
@@ -115,57 +116,59 @@ export const STORY = {
       allyDialogues: null
     },
 
-    // ── Chapter 5: Dulces recompensas ──────────────────────────────
+    // ── Chapter 5: Cap. 5: Dulce Recompensa ──────────────────────────────
     {
       num: 5,
-      title: 'Dulces recompensas',
+      title: 'Cap. 5: Dulce Recompensa',
       bgClass: 'bg-cemic',
       melody: 'angeles',
       particleType: 'salud',
       introDialogues: [
-        { name: 'Narrador', text: 'Tras un gran banquete con delicias místicas, Viviana quedó con un exceso de maná...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'Fueron a ver a un médico especialista en magia para tratar este exceso.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Pero el maná descontrolado atrajo al Fantasma del Azúcar!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Ya instalados en su base, Viviana y Gastón deciden hacer un gran banquete mágico que duró varios días y noches...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Desayunos con mermeladas ácidas de slime, pan de lembas y agua miel. Almuerzos con jamón de jabalí cuernos de oro y huevos fritos de hipogrifa. Cena de mantícoras rellenas de hongos envueltas en tocino.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'No se dieron cuenta que esos alimentos tenían mucha carga de maná, ¡tanta que se sobrecargó Viviana!', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Tuvieron que buscar una médica especialista en exceso de maná que a toda costa quería que Viviana eliminara esa energía.', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'diabetologa', name: 'Fantasma del Azúcar', emoji: '👻', spriteId: 'hospital', hp: 60, maxHp: 60, color: '#3498db', imageUrl: 'assets/diabetologa.png', flip: true },
+      enemy: { id: 'diabetologa', name: 'Médica de Maná', emoji: '👩‍⚕️', spriteId: 'hospital', hp: 60, maxHp: 60, color: '#3498db', projEmoji: '🍬', imageUrl: 'assets/diabetologa.png', flip: true },
       battleScript: [
         { turn: 'player', text: '¡Canalizan el exceso de maná en un rayo purificador!', damage: 20 },
-        { turn: 'enemy', text: 'El fantasma ataca con un pico de glucosa mágica.', damage: 15 },
-        { turn: 'player', text: '¡Un hechizo de insulina mística disipa al fantasma!', damage: 40 }
+        { turn: 'enemy', text: 'La médica ataca con un análisis de maná estricto.', damage: 15 },
+        { turn: 'player', text: '¡Un hechizo de drenaje disipa la tensión energética!', damage: 40 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'El fantasma es derrotado y el exceso de maná cristaliza...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡De esa cristalización mágica nace un nuevo ser!', portrait: '✨', color: '#f1c40f' },
-        { name: 'Narrador', text: '¡Valentina, Druida y ama de bestias, se une a la party!', portrait: '🎉', color: '#27ae60' },
+        { name: 'Narrador', text: 'Luego de muchos hechizos y lucha, Viviana logró liberar todo ese maná, pero no en forma de energía, sino en un nuevo ser...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡De esa energía pura nace Valentina, la ama de las bestias, y se une a la party!', portrait: '🎉', color: '#27ae60' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Magia y nueva vida ✨', portrait: '✨', color: '#a29bfe', textColor: '#a29bfe' }
       ],
       allyIndex: 0,
       allyDialogues: [
-        { name: 'Valentina', text: '¡Las bestias están bajo control! Vamos a seguir adelante.', portrait: '🦁', color: '#27ae60' }
+        { name: 'Valentina', text: 'Todas las bestias están a mi diestra y bajo mi mando, me sigue una sombra de gatos que hacen mi voluntad. ¡Todo michi es mío y hermoso. Gataquen!', portrait: '🐾', color: '#27ae60' }
       ]
     },
 
-    // ── Chapter 6: La nueva Base en Tab'ladah ─────────────────────
+    // ── Chapter 6: Cap. 6: Camino a Tabla'Dah ─────────────────────
     {
       num: 6,
-      title: 'La nueva Base en Tab\'ladah',
+      title: 'Cap. 6: Camino a Tabla\'Dah',
       bgClass: 'bg-tablada',
       melody: 'burger',
       particleType: 'comida',
       introDialogues: [
-        { name: 'Narrador', text: 'Tras el esfuerzo de buscar esta base, solicitaron el envío de provisiones.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'Pero algo oscuro se escondía entre los víveres...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Un monstruo de carne y queso se coló y ahora ataca!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Ya siendo tres en la party, la base les quedaba chica, así que tuvieron que buscar un nuevo rumbo en la región de Tab\'lada.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Zona que Gastón recorrió de pequeño, conocido como Gastón "el niño piro" porque quemaba todo lo que estaba a su paso.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Se hace de noche y aparece un vendedor misterioso que les recomienda la hamburguesa con queso monstruo y papas fritas, advirtiendo que si la comen "mal" les pateará el hígado.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Pasan por alto el comentario. Al apoyar el paquete en la mesa, ¡empieza a moverse solo! Salen tentáculos amarillos de cheddar y vuelan papas fritas...', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'burger', name: 'Burger Mutante', emoji: '🍔', spriteId: 'burger', hp: 60, maxHp: 60, color: '#d2691e', imageUrl: 'assets/burguer.png' },
+      enemy: { id: 'burger', name: 'Burger Mutante', emoji: '🍔', spriteId: 'burger', hp: 60, maxHp: 60, color: '#d2691e', projEmoji: '🍔', imageUrl: 'assets/burguer.png' },
       battleScript: [
         { turn: 'player', text: '¡Ataque de tenedor afilado!', damage: 30 },
-        { turn: 'enemy', text: 'Lanza chorro de ketchup radiactivo.', damage: 20 },
+        { turn: 'enemy', text: 'Lanza chorro de ketchup y cheddar radiactivo.', damage: 20 },
         { turn: 'player', text: '¡Te comés la mutación con papas fritas!', damage: 30 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'Mudanza completada y cena superada.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Comienza la batalla a mordiscos, golpes y encantamientos. Después de un gran esfuerzo, ¡los tres lograron comerse todo el combo!', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Terminaron agotados y decidieron solo comer lo que se cocina en casa, la comida a domicilio puede ser muy peligrosa.', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Que bueno es comer juntos ✨', portrait: '✨', color: '#e84393', textColor: '#e84393' }
       ],
@@ -173,114 +176,119 @@ export const STORY = {
       allyDialogues: null
     },
 
-    // ── Chapter 7: Hospital Militar ───────────────────────────────────
+    // ── Chapter 7: Cap. 7: Amor Amarillo ───────────────────────────────────
     {
       num: 7,
-      title: 'Hospital Militar',
+      title: 'Cap. 7: Amor Amarillo',
       bgClass: 'bg-cemic',
       melody: 'militar',
       particleType: 'salud',
       introDialogues: [
-        { name: 'Narrador', text: 'Viviana se puso más y más mandona con el tiempo...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'La party lleva a Viviana al bastion medico strictus para sanar su manditis amarilla.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Aparece la temible Enfermera Severus!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Como equipo de tres, Viviana empezó a organizar las alacenas de pócimas, estantes de armas, cofres y hasta las aventuras. Se llenó de responsabilidades y se volvió súper estricta.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Gastón y Valentina ya no lo soportaban, así que decidieron llevar a Viviana a El bastión médico Strictus para que le drenen esa energía.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Esa acumulación de energía amarilla obstruía sus canales de magia. La única forma era enfrentarse a alguien aún más mandona que Viviana...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Y así aparece la temible Enfermera Serverus!', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'militar', name: 'Enfermera Severus', emoji: '👩‍⚕️', spriteId: 'militar', hp: 55, maxHp: 55, color: '#e74c3c', imageUrl: 'assets/militar.png', flip: true },
+      enemy: { id: 'militar', name: 'Enfermera Serverus', emoji: '👩‍⚕️', spriteId: 'militar', hp: 55, maxHp: 55, color: '#e74c3c', projEmoji: '💊', imageUrl: 'assets/militar.png', flip: true },
       battleScript: [
         { turn: 'player', text: '¡Atacan con paciencia y mucho amor!', damage: 25 },
         { turn: 'enemy', text: 'La enfermera ataca con luz azul y pesadas reglas.', damage: 15 },
         { turn: 'player', text: '¡Un abrazo cargado de paciencia y amor logra purificar el lugar!', damage: 30 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'El ente amarillo expulsado se condensa en una nueva forma...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Da origen a Margarita, la pícara berserker, que se une a la party!', portrait: '🎉', color: '#e67e22' },
+        { name: 'Narrador', text: 'La enfermera Serverus, con su energía mágica azulina, logró liberar los canales de magia de Viviana.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Como era una cantidad de energía enorme, al liberarla nació un nuevo ser brillante, enérgico y temperamental...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Margarita la pícara berserker se une a la party!', portrait: '🎉', color: '#e67e22' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Bienvenida, ahora si estamos todos! ✨', portrait: '✨', color: '#e67e22', textColor: '#e67e22' }
       ],
       allyIndex: 1,
       allyDialogues: [
-        { name: 'Margarita', text: '¡Nada de rigidez! ¡A saltar y romper todo en modo berserker!', portrait: '🤸‍♀️', color: '#e67e22' }
+        { name: 'Margarita', text: '¡Pase, salto, rondo, spagat y decapitación! Bromear, atacar, ágil y brutal. ¡Se acabó la rigidez!', portrait: '🤸‍♀️', color: '#e67e22' }
       ]
     },
 
-    // ── Chapter 8: La aventura congelada ───────────────────────────
+    // ── Chapter 8: Cap. 8: Aventura Congelada ───────────────────────────
     {
       num: 8,
-      title: 'La aventura congelada',
+      title: 'Cap. 8: Aventura Congelada',
       bgClass: 'bg-militar',
       melody: 'yeti',
       particleType: 'snow',
       introDialogues: [
-        { name: 'Narrador', text: 'En su travesía para encontrar la aventura última...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'El frío congela los huesos en las nieves eternas.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Un inmenso Yeti de hielo bloquea el paso!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Viviana la maga, Gastón el bárbaro, Valentina la druida y Margarita la pícara acróbata se preparan para una aventura en las laderas nevadas de la cordillera Andin, que separa Chill\'e y Argent\'ina.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Tienen la misión de encontrar unos fragmentos de seres ancestrales que pueden generar maná ilimitado.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Pasaron por el lago Agrio (lleno de ácido sulfúrico) y rodearon las paredes del volcán Copahue humeante y oloroso...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Pero al llegar se encuentran con el guardián de los fragmentos: un Yeti de 4 metros completamente de hielo y nieve!', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'yeti', name: 'Yeti de hielo', emoji: '❄️', spriteId: 'yeti', hp: 80, maxHp: 80, color: '#e0f7fa', imageUrl: 'assets/yeti.png' },
+      enemy: { id: 'yeti', name: 'Yeti de hielo', emoji: '❄️', spriteId: 'yeti', hp: 80, maxHp: 80, color: '#e0f7fa', projEmoji: '❄️', imageUrl: 'assets/yeti.png' },
       battleScript: [
         { turn: 'player', text: '¡Ataque de bola de nieve traicionera!', damage: 30 },
         { turn: 'enemy', text: 'El Yeti ruge creando una ventisca.', damage: 25 },
         { turn: 'player', text: '¡Le ofrecés chocolate caliente y se calma!', damage: 50 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'El Yeti de hielo se va caminando feliz con su chocolate.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Lucharon los cuatro con todas sus fuerzas y lograron obtener los fragmentos.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Los fragmentos conformaron una nueva orbe y vencieron al Yeti!', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
-        { name: 'Orbe de Recuerdos', text: '✨ Una aventura congelada -pero no es frozen eh!- ✨', portrait: '✨', color: '#74b9ff', textColor: '#74b9ff' }
+        { name: 'Orbe de Recuerdos', text: '✨ Una aventura congelada ✨', portrait: '✨', color: '#74b9ff', textColor: '#74b9ff' }
       ],
       allyIndex: null,
       allyDialogues: null
     },
 
-    // ── Chapter 9: Rey Gato ────────────────────────────────────────
+    // ── Chapter 9: Cap. 9: Rey Gato ────────────────────────────────────────
     {
       num: 9,
-      title: 'Rey Gato',
+      title: 'Cap. 9: Rey Gato',
       bgClass: 'bg-tablada',
       melody: 'reygato',
       particleType: 'hearts',
       introDialogues: [
-        { name: 'Narrador', text: 'En el living, sobre un trono de cartón...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'El verdadero dueño de la casa revela su identidad.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Es el Rey Gato: una masa de gatos aglomerados exigiendo tributo!', portrait: '⚔️', color: '#e17055' }
+        { name: 'Narrador', text: 'Descansando en su refugio, empiezan a notar movimientos extraños: sombras rápidas, comida que desaparece de las alacenas y carne devorada de la heladera.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Una noche escuchan ruidos extraños en el comedor. Al encender la luz ven algo que les erizó la piel...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Un cúmulo de seres que ronroneaban y maullaban sentados en un trono (¿de dónde salió?). Valentina traduce que dicen ser los dueños de todo y que no pueden evitarlo.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Es hora de enfrentarse al Rey Gato!', portrait: '⚔️', color: '#e17055' }
       ],
-      enemy: { id: 'gato', name: 'Rey Gato', emoji: '🐈', spriteId: 'gato', hp: 70, maxHp: 70, color: '#f1c40f', imageUrl: 'assets/gatos.png' },
+      enemy: { id: 'gato', name: 'Rey Gato', emoji: '🐈', spriteId: 'gato', hp: 70, maxHp: 70, color: '#f1c40f', projEmoji: '🐾', imageUrl: 'assets/gatos.png' },
       battleScript: [
         { turn: 'player', text: '¡Agitás un láser rojo rápidamente!', damage: 30 },
         { turn: 'enemy', text: 'Zarpazo real de desdén absoluto.', damage: 10 },
         { turn: 'player', text: '¡Abrís una lata de paté premium!', damage: 40 }
       ],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'El Rey Gato y sus súbditos aceptan el tributo.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡Multigatos se unen a la party (cuando tienen ganas)!', portrait: '🎉', color: '#f1c40f' },
+        { name: 'Narrador', text: 'Sabían que la batalla tenía que ser larga; debían aguantar hasta que al Rey Gato le diera sueño...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Lucharon hasta que el cúmulo de gatos se durmió y se debilitó, diciendo: "pueden ser nuestros sirvientes y nosotros los ayudaremos, cuando tengamos ganas".', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: '¡Así consiguieron al último aliado de la party, el Rey Gato!', portrait: '🎉', color: '#f1c40f' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ Miau miau miau! ✨', portrait: '✨', color: '#f1c40f', textColor: '#f1c40f' }
       ],
       allyIndex: 2,
       allyDialogues: [
-        { name: 'Multigatos', text: '¡Miau! ¡Miau! (Nos unimos a esta hermosa familia)', portrait: '🐾', color: '#f1c40f' }
+        { name: 'Multigato', text: 'Miau, maumau Miau mau. (Nosotros los ayudaremos, cuando tengamos ganas de hacerlo).', portrait: '🐾', color: '#f1c40f' }
       ]
     },
 
-    // ── Chapter 10: Igua'zu (cinematic) ──────────────────────────
+    // ── Chapter 10: Cap. 10: Mensaje de la Luna ──────────────────────────
     {
       num: 10,
-      title: 'Igua\'zu',
+      title: 'Cap. 10: Mensaje de la Luna',
       bgClass: 'bg-tablada',
       melody: 'mistica',
       particleType: 'stars',
       image: 'assets/luna.png',
       introDialogues: [
-        { name: 'Narrador', text: 'Llegaron a las Cataratas del Iguazú.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'El agua ruge y cae con fuerza infinita...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'No hay enemigos aquí.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'En el cielo nocturno, aparece la Luna Oracular.', portrait: '🌙', color: '#dfe6e9' },
-        { name: 'Narrador', text: 'El camino recorrido los ha traído hasta aquí...', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'Prepárense para la prueba final...', portrait: '📖', color: '#a29bfe' }
+        { name: 'Narrador', text: 'Fueron encomendados por una Clériga Selenita para recibir el mensaje que debía darles la Diosa Lunar.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Atravesaron la selva espesa solo guiados por la luz lunar. Al acostumbrarse su vista, vieron la sombra de un Leviatán en los ríos, pájaros azules brillantes y los ojos de un yaguarundí.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'Comenzaron a oír el rugido potente proveniente de una de las caídas de agua más grandes que nunca olvidarán: las cataratas sagradas de Igua\'zu.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Diosa Selenita', text: 'Llegaron hasta acá después de muchas aventuras. Para poder pasar de nivel deben enfrentarse al Cerezo ancestral.', portrait: '🌙', color: '#dfe6e9' },
+        { name: 'Diosa Selenita', text: 'Les entrego mi halo lunar de protección para su próxima batalla.', portrait: '🌙', color: '#dfe6e9' },
+        { name: 'Narrador', text: 'Un anillo de luz descendió y se grabó en el dedo anular de Gastón y Viviana.', portrait: '📖', color: '#a29bfe' }
       ],
       enemy: null,
       battleScript: [],
       resolutionDialogues: [
-        { name: 'Narrador', text: 'El agua y la luna brillan con intensidad.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'La party avanza con determinación.', portrait: '📖', color: '#a29bfe' },
+        { name: 'Narrador', text: 'El agua y la luna brillan con intensidad. Con la bendición de los halos de luz grabados en sus dedos, avanzan.', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
         { name: 'Orbe de Recuerdos', text: '✨ La luna llena y la propuesta ✨', portrait: '✨', color: '#dfe6e9', textColor: '#dfe6e9' }
       ],
@@ -288,55 +296,58 @@ export const STORY = {
       allyDialogues: null
     },
 
-    // ── Chapter 11: BOSS – El Cerezo Milenario ──────────────────────────
+    // ── Chapter 11: Cap. 11: El Cerezo milenario ──────────────────────────
     {
       num: 11,
-      title: 'El cerezo milenario',
+      title: 'Cap. 11: El Cerezo milenario',
       bgClass: 'bg-jardin',
       melody: 'epica',
       particleType: 'hearts',
       introDialogues: [
-        { name: 'Narrador', text: 'Frente a ustedes se yergue el imponente Cerezo Milenario.', portrait: '🌸', color: '#fd79a8' },
-        { name: 'El Cerezo Milenario', text: '¡Alto ahí, simples mortales!', portrait: '🌸', color: '#fd79a8' },
-        { name: 'El Cerezo Milenario', text: '¿Están seguros de que se aman lo suficiente como para portar estos anillos?', portrait: '🌸', color: '#fd79a8' }
+        { name: 'Narrador', text: 'Los 4 viajeros, más el Rey Gato fueron a enfrentarse al Cerezo.', portrait: '🌸', color: '#fd79a8' },
+        { name: 'El Cerezo Milenario', text: '¡Alto ahí, simples mortales! ¿Están seguros de que se aman lo suficiente como para portar estos anillos?', portrait: '🌸', color: '#fd79a8' },
+        { name: 'Narrador', text: 'Sus hechizos y espadas no logran hacerle ni un rasguño. ¡Lo único que les queda es el poder de los orbes de recuerdos que ganaron!', portrait: '📖', color: '#a29bfe' }
       ],
-      enemy: { id: 'cerezo', name: 'El Cerezo Milenario', emoji: '🌸', spriteId: 'cerezo', hp: 150, maxHp: 150, color: '#fd79a8', imageUrl: 'assets/cerezo.png', defeatText: 'El Cerezo Milenario está profundamente conmovido...' },
+      enemy: { id: 'cerezo', name: 'El Cerezo Milenario', emoji: '🌸', spriteId: 'cerezo', hp: 150, maxHp: 150, color: '#fd79a8', projEmoji: '🌸', imageUrl: 'assets/cerezo.png', defeatText: 'El Cerezo Milenario está profundamente conmovido...' },
       battleScript: [
-        { turn: 'player', text: '¡Le ofrecen el Orbe de Peor que un hombre lobo es la menta granizada: Primera cita y hombres lobo!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de Atacando al system: Banana terracota pie!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de Los vampiros de Zar\'Ate: El primer viaje!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de La base en Ram\'Os: Nuestra primera casita!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de Dulces recompensas: Magia y nueva vida!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de La nueva Base en Tab\' Ladah: Que bueno es comer juntos!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de Amor amarillo: Bienvenida, ahora si estamos todos!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de La aventura congelada: nieve volcanes y el viaje al oeste!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Paseo la plaza: Primera cita y hombres lobo!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Ataca el System: Banana terracota pie!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Vampiros de Zar\'Ate: El primer viaje!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Base en Ra\'mos: Nuestra primera casita!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Dulce Recompensa: Magia y nueva vida!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Camino a Tabla\'Dah: Que bueno es comer juntos!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Amor Amarillo: Bienvenida, ahora si estamos todos!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Aventura Congelada: Una aventura congelada!', damage: 15 },
         { turn: 'player', text: '¡Le ofrecen el Orbe del Rey Gato: Miau miau miau!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de la Luna Oracular: La luna llena y la propuesta!', damage: 15 }
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Mensaje de la Luna: La luna llena y la propuesta!', damage: 15 }
       ],
       resolutionDialogues: [
-        { name: 'El Cerezo Milenario', text: '¡Ah! ¡Tantos recuerdos hermosos juntos... me llenan de alegría!', portrait: '🌸', color: '#fd79a8' },
-        { name: 'Narrador', text: 'El Cerezo absorbe los orbes y derrama su bendición sobre ustedes.', portrait: '✨', color: '#f1c40f' },
-        { name: 'Narrador', text: 'De pronto, florece radiante e ilumina todo el jardín con pétalos mágicos.', portrait: '✨', color: '#f1c40f' },
-        { name: 'Narrador', text: 'De sus ramas bajó flotando el regalo final.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: '¡LOS ANILLOS FUERON OBTENIDOS!', portrait: '💍', color: '#fdcb6e' }
+        { name: 'Narrador', text: 'Lanzaron los orbes uno a uno, y la magia de esos recuerdos empezó a resquebrajar la corteza del Cerezo, rindiéndose.', portrait: '🌸', color: '#fd79a8' },
+        { name: 'El Cerezo Milenario', text: 'Esos bellos e irremplazables recuerdos, la cantidad de energía magica que tienen y a pesar de ello los están sacrificando por algo que no saben si vale la pena...', portrait: '🌸', color: '#fd79a8' },
+        { name: 'El Cerezo Milenario', text: '...eso me conmueve en lo más profundo de mis raices. Aquí tienen sus enlaces físico-espiritual.', portrait: '🌸', color: '#fd79a8' },
+        { name: 'Narrador', text: 'Los halos de luz se materializaron en anillos de compromiso.', portrait: '💍', color: '#fdcb6e' },
+        { name: 'Viviana', text: 'Con nuestras hazañas, sean victoriosas o desastrosas no se deben olvidar, lo principal es aprender la causa y efecto de nuestras acciones y a partir de esto fluir, transformar el ego y dolor en sabiduría y amor.', portrait: '✨', color: '#9b59b6' },
+        { name: 'Gastón', text: 'Cuantos años hace que salimos al mundo sin saber lo que habia afuera. Aventura, dolores y alegrias. Me alegro tanto de quienes estan en esta party lluchando y compartiendo la mesa conmigo <3.', portrait: '🍳', color: '#e74c3c' },
+        { name: 'Valentina', text: 'Un viaje largo pero ya somos una manada y las manadas son para siempre, nos podemos pelear pero nunca nos separamos.', portrait: '🦁', color: '#27ae60' },
+        { name: 'Margarita', text: 'Cada uno es la colchoneta del otro, si uno se cae evitamos que se lo coma el Yeti.', portrait: '🤸‍♀️', color: '#e67e22' },
+        { name: 'Multigatos', text: 'Miau, maumau Miau mau.', portrait: '🐈', color: '#f1c40f' }
       ],
       allyIndex: null,
       allyDialogues: null
     },
 
-    // ── Chapter 12: La Grulla ──────────────────────────
+    // ── Chapter 12: Cap. 12: Gruya del destino ──────────────────────────
     {
       num: 12,
-      title: 'El Final del Camino?',
+      title: 'Cap. 12: Gruya del destino',
       bgClass: 'bg-jardin',
       melody: 'grulla',
       particleType: 'sparkle',
       image: 'assets/gruya.png',
       introDialogues: [
-        { name: 'Narrador', text: 'El cielo se despeja y el viento trae un suave sonido.', portrait: '📖', color: '#a29bfe' },
-        { name: 'Grulla de la buenaventura', text: '¡Kuaaa! Soy la Grulla de la buenaventura.', portrait: '🦩', color: '#fff' },
-        { name: 'Grulla de la buenaventura', text: 'Les anuncio que, aunque hayan obtenido los anillos...', portrait: '🦩', color: '#fff' },
-        { name: 'Grulla de la buenaventura', text: '¡La verdadera aventura continúa!', portrait: '🦩', color: '#fff' }
+        { name: 'Narrador', text: 'Una grulla majestuosa descendió de las nubes portando un pergamino brillante...', portrait: '📖', color: '#a29bfe' },
+        { name: 'Grulla de la Buenaventura', text: 'Estás invitado a presenciar el momento culmine de esta hermosa aventura...', portrait: '🦩', color: '#fff' },
+        { name: 'Grulla de la Buenaventura', text: 'Te esperamos el viernes 17 de julio del 2026 a las 13:50 en el jardín japonés.', portrait: '🦩', color: '#fff' }
       ],
       enemy: null,
       battleScript: [],
