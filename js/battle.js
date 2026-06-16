@@ -65,7 +65,7 @@ class BattleEngine {
       if (enemy.id === 'cerezo') {
         img.classList.add('cerezo-boss');
       }
-      img.src = enemy.imageUrl + '?v=53';
+      img.src = enemy.imageUrl + '?v=38';
       // Use height instead of width for enemy
       img.style.height = 'clamp(80px, 22vh, 180px)';
       img.style.maxHeight = '180px';
@@ -111,10 +111,9 @@ class BattleEngine {
 
     // Hero
     const heroWrap = createEl('div', 'battle-sprite');
-    heroWrap.id = `battle-char-${hero.id}`;
     if (hero && hero.imageUrl) {
       const img = createEl('img', 'battle-image');
-      img.src = hero.imageUrl + '?v=53';
+      img.src = hero.imageUrl + '?v=38';
       // Use height instead of width so aspect ratio doesn't distort relative sizes
       img.style.height = 'clamp(70px, 18vh, 150px)';
       img.style.maxHeight = '150px';
@@ -144,17 +143,18 @@ class BattleEngine {
     heroWrap.style.display = 'flex';
     heroWrap.style.flexDirection = 'column';
     heroWrap.style.alignItems = 'center';
+    heroWrap.classList.add('battle-floating');
+    heroWrap.id = 'battle-member-hero';
     
     playerSpriteWrap.appendChild(heroWrap);
 
     // Party members
     party.forEach(member => {
       const memWrap = createEl('div', 'battle-sprite');
-      memWrap.id = `battle-char-${member.id}`;
       memWrap.style.transformOrigin = 'bottom';
       if (member.imageUrl) {
         const img = createEl('img', 'battle-image');
-        img.src = member.imageUrl + '?v=53';
+        img.src = member.imageUrl + '?v=38';
         img.style.height = 'clamp(70px, 18vh, 150px)';
         img.style.maxHeight = '150px';
         img.style.width = 'auto';
@@ -185,6 +185,10 @@ class BattleEngine {
       memWrap.style.flexDirection = 'column';
       memWrap.style.alignItems = 'center';
       memWrap.style.justifyContent = 'flex-end';
+      memWrap.classList.add('battle-floating');
+      // Offset de animación para que no todos floten igual
+      memWrap.style.animationDelay = `${(playerSpriteWrap.children.length) * 0.3}s`;
+      memWrap.id = `battle-member-${member.id}`;
       
       playerSpriteWrap.appendChild(memWrap);
     });
@@ -246,37 +250,16 @@ class BattleEngine {
 
     // Apply damage
     if (turnData.turn === 'player') {
-      const playerEl = document.getElementById('battle-player-entity');
-      const enemyEl = document.getElementById('battle-enemy-entity');
-      const actorEl = document.getElementById('battle-char-' + actor.id) || playerEl;
-
-      const isCerezo = this.levelData.enemy && this.levelData.enemy.id === 'cerezo';
-      const rawEmoji = actor.projEmoji || actor.emoji || '⚔️';
-      const projEmoji = isCerezo ? '❤️' : (Array.isArray(rawEmoji) ? rawEmoji[Math.floor(Math.random() * rawEmoji.length)] : rawEmoji);
-      const projColor = isCerezo ? '#fd79a8' : (actor.color || '#fff');
-
-      this.shootProjectile(actorEl, enemyEl, projEmoji, projColor);
-      await wait(500);
-
+      if (this.levelData.enemy && this.levelData.enemy.id === 'cerezo') {
+        this.shootHeart();
+        await wait(500);
+      }
       this.enemyHP = Math.max(0, this.enemyHP - turnData.damage);
       this.updateHP('enemy');
       this.flashEntity('battle-enemy-entity');
     } else {
-      const enemyEl = document.getElementById('battle-enemy-entity');
-      const playerEl = document.getElementById('battle-player-entity');
-      const targetEl = document.getElementById('battle-char-' + actor.id) || playerEl;
-      const enemy = this.levelData.enemy;
-      if (enemy && enemyEl && targetEl) {
-        const projEmoji = enemy.projEmoji || enemy.emoji || '👾';
-        const projColor = enemy.color || '#fff';
-
-        this.shootProjectile(enemyEl, targetEl, projEmoji, projColor);
-        await wait(500);
-      }
-
-      // Player takes damage (scripted, no actual HP tracking)
-      const hitElId = document.getElementById('battle-char-' + actor.id) ? ('battle-char-' + actor.id) : 'battle-player-entity';
-      this.flashEntity(hitElId);
+      // Enemy attacks — flash EVERY party member individually
+      this.flashAllPartyMembers();
     }
 
     await wait(500);
@@ -292,41 +275,43 @@ class BattleEngine {
     }
   }
 
-  shootProjectile(fromEl, toEl, char, color) {
-    if (!fromEl || !toEl || !this.battleArea) return;
+  shootHeart() {
+    const playerEl = document.getElementById('battle-player-entity');
+    const enemyEl = document.getElementById('battle-enemy-entity');
+    if (!playerEl || !enemyEl || !this.battleArea) return;
     
-    const proj = createEl('div', 'battle-projectile', char);
-    proj.style.position = 'absolute';
-    proj.style.fontSize = '32px';
-    proj.style.zIndex = '100';
-    proj.style.pointerEvents = 'none';
-    proj.style.filter = `drop-shadow(0 0 10px ${color})`;
+    const heart = createEl('div', 'battle-heart', '❤️');
+    heart.style.position = 'absolute';
+    heart.style.fontSize = '32px';
+    heart.style.zIndex = '100';
+    heart.style.pointerEvents = 'none';
+    heart.style.filter = 'drop-shadow(0 0 10px rgba(232,67,147,0.8))';
     
-    const fromRect = fromEl.getBoundingClientRect();
-    const toRect = toEl.getBoundingClientRect();
+    const pRect = playerEl.getBoundingClientRect();
+    const eRect = enemyEl.getBoundingClientRect();
     const containerRect = this.battleArea.getBoundingClientRect();
     
-    const startX = fromRect.left + fromRect.width / 2 - containerRect.left - 16;
-    const startY = fromRect.top + fromRect.height / 2 - containerRect.top - 16;
-    const endX = toRect.left + toRect.width / 2 - containerRect.left - 16;
-    const endY = toRect.top + toRect.height / 2 - containerRect.top - 16;
+    const startX = pRect.left + pRect.width / 2 - containerRect.left - 16;
+    const startY = pRect.top + pRect.height / 2 - containerRect.top - 16;
+    const endX = eRect.left + eRect.width / 2 - containerRect.left - 16;
+    const endY = eRect.top + eRect.height / 2 - containerRect.top - 16;
     
-    proj.style.left = `${startX}px`;
-    proj.style.top = `${startY}px`;
-    proj.style.transition = 'all 0.5s ease-in-out';
+    heart.style.left = `${startX}px`;
+    heart.style.top = `${startY}px`;
+    heart.style.transition = 'all 0.5s ease-in-out';
     
-    this.battleArea.appendChild(proj);
+    this.battleArea.appendChild(heart);
     
     // trigger reflow
-    void proj.offsetWidth;
+    void heart.offsetWidth;
     
-    proj.style.left = `${endX}px`;
-    proj.style.top = `${endY}px`;
-    proj.style.transform = 'scale(2.5)';
-    proj.style.opacity = '0';
+    heart.style.left = `${endX}px`;
+    heart.style.top = `${endY}px`;
+    heart.style.transform = 'scale(2.5)';
+    heart.style.opacity = '0';
     
     setTimeout(() => {
-      if (proj.parentNode) proj.remove();
+      if (heart.parentNode) heart.remove();
     }, 500);
   }
 
@@ -339,6 +324,37 @@ class BattleEngine {
       el.classList.remove('battle-hit');
       el.classList.add('battle-floating');
     }, 500);
+  }
+
+  flashAllPartyMembers() {
+    // Flash el hero
+    const heroEl = document.getElementById('battle-member-hero');
+    if (heroEl) {
+      heroEl.classList.remove('battle-floating');
+      heroEl.classList.add('battle-hit');
+      setTimeout(() => {
+        heroEl.classList.remove('battle-hit');
+        heroEl.classList.add('battle-floating');
+      }, 500);
+    }
+    // Flash cada miembro de la party por su id
+    if (this.party) {
+      this.party.forEach(member => {
+        const el = document.getElementById(`battle-member-${member.id}`);
+        if (el) {
+          // Delay escalonado para efecto en cascada
+          const delay = Math.random() * 80;
+          setTimeout(() => {
+            el.classList.remove('battle-floating');
+            el.classList.add('battle-hit');
+            setTimeout(() => {
+              el.classList.remove('battle-hit');
+              el.classList.add('battle-floating');
+            }, 500);
+          }, delay);
+        }
+      });
+    }
   }
 
   async endBattle() {

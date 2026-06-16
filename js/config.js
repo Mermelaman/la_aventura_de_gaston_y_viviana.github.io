@@ -12,11 +12,11 @@ export const CONFIG = {
 
   // Detalles del evento
   wedding: {
-    date: 'Viernes 17 de julio',
-    time: '13:50 hs.',
+    date: '17 de Julio',
+    time: '13:50 hs',
     venue: 'Jardín Japonés',
     address: 'Av. Casares 3450, CABA',
-    dressCode: 'Como gusten (¡se aprecia friki o colorido!)',
+    dressCode: 'Como gusten (¡se aprecia freaky o colorido!)',
     ceremony: 'Después podemos ir a tomar algo si gustan.',
   },
 

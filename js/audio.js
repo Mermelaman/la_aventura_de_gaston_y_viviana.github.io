@@ -240,143 +240,187 @@ class AudioEngine {
       this.masterGain.connect(this.ctx.destination);
       this.initialized = true;
     } catch (e) {
-      console.warn('Web Audio API not supported');
+      console.warn('Web Audio API not supported', e);
+      this.initialized = false;
+      this.ctx = null;
     }
   }
 
   resume() {
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+    try {
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume();
+      }
+    } catch (e) {
+      console.warn('Audio context resume failed', e);
     }
   }
 
   _playNote(freq, startTime, duration, type = 'square', isMelody = false) {
-    if (!this.ctx || this.muted) return;
-    const osc = this.ctx.createOscillator();
-    const noteGain = this.ctx.createGain();
-    osc.type = type;
-    osc.frequency.value = freq;
-    noteGain.gain.setValueAtTime(0.3, startTime);
-    noteGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration * 0.9);
-    osc.connect(noteGain);
-    noteGain.connect(this.masterGain);
-    osc.start(startTime);
-    osc.stop(startTime + duration);
-    
-    if (isMelody) {
-      this.activeOscillators.push(osc);
-      osc.onended = () => {
-        const idx = this.activeOscillators.indexOf(osc);
-        if (idx > -1) this.activeOscillators.splice(idx, 1);
-      };
+    try {
+      if (!this.ctx || this.muted) return;
+      const osc = this.ctx.createOscillator();
+      const noteGain = this.ctx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      noteGain.gain.setValueAtTime(0.3, startTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration * 0.9);
+      osc.connect(noteGain);
+      noteGain.connect(this.masterGain);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+      
+      if (isMelody) {
+        this.activeOscillators.push(osc);
+        osc.onended = () => {
+          const idx = this.activeOscillators.indexOf(osc);
+          if (idx > -1) this.activeOscillators.splice(idx, 1);
+        };
+      }
+    } catch (e) {
+      console.warn('Error playing note:', e);
     }
   }
 
   playMelody(name) {
-    if (!this.initialized) this.init();
-    this.stopMelody();
-    const melody = MELODIES[name];
-    if (!melody || !this.ctx) return;
-    this.isPlaying = true;
-    this.currentMelody = name;
-    this.resume();
-    this._scheduleMelody(melody);
+    try {
+      if (!this.initialized) this.init();
+      this.stopMelody();
+      const melody = MELODIES[name];
+      if (!melody || !this.ctx) return;
+      this.isPlaying = true;
+      this.currentMelody = name;
+      this.resume();
+      this._scheduleMelody(melody);
+    } catch (e) {
+      console.warn('Error playing melody:', e);
+    }
   }
 
   _scheduleMelody(melody) {
-    const beatDuration = 60 / melody.bpm;
-    let time = this.ctx.currentTime + 0.1;
-    for (const note of melody.notes) {
-      const freq = NOTE_FREQS[note.n];
-      const dur = note.d * beatDuration;
-      if (freq) this._playNote(freq, time, dur, 'square', true);
-      time += dur;
-    }
-    const totalDuration = melody.notes.reduce((s, n) => s + n.d, 0) * beatDuration;
-    if (melody.loop && this.isPlaying) {
-      this.melodyTimeout = setTimeout(() => {
-        if (this.isPlaying && this.currentMelody) {
-          this._scheduleMelody(melody);
-        }
-      }, totalDuration * 1000);
+    try {
+      if (!this.ctx) return;
+      const beatDuration = 60 / melody.bpm;
+      let time = this.ctx.currentTime + 0.1;
+      for (const note of melody.notes) {
+        const freq = NOTE_FREQS[note.n];
+        const dur = note.d * beatDuration;
+        if (freq) this._playNote(freq, time, dur, 'square', true);
+        time += dur;
+      }
+      const totalDuration = melody.notes.reduce((s, n) => s + n.d, 0) * beatDuration;
+      if (melody.loop && this.isPlaying) {
+        this.melodyTimeout = setTimeout(() => {
+          try {
+            if (this.isPlaying && this.currentMelody) {
+              this._scheduleMelody(melody);
+            }
+          } catch (e) {
+            console.warn('Error inside loop scheduleMelody:', e);
+          }
+        }, totalDuration * 1000);
+      }
+    } catch (e) {
+      console.warn('Error scheduling melody:', e);
     }
   }
 
   stopMelody() {
-    this.isPlaying = false;
-    this.currentMelody = null;
-    if (this.melodyTimeout) {
-      clearTimeout(this.melodyTimeout);
-      this.melodyTimeout = null;
+    try {
+      this.isPlaying = false;
+      this.currentMelody = null;
+      if (this.melodyTimeout) {
+        clearTimeout(this.melodyTimeout);
+        this.melodyTimeout = null;
+      }
+      this.activeOscillators.forEach(osc => {
+        try { 
+          osc.stop(); 
+          osc.disconnect(); 
+        } catch(e) {}
+      });
+      this.activeOscillators = [];
+    } catch (e) {
+      console.warn('Error stopping melody:', e);
     }
-    this.activeOscillators.forEach(osc => {
-      try { 
-        osc.stop(); 
-        osc.disconnect(); 
-      } catch(e) {}
-    });
-    this.activeOscillators = [];
   }
 
   // Sound Effects
   playSfx(type) {
-    if (!this.initialized) this.init();
-    if (!this.ctx || this.muted) return;
-    this.resume();
-    const now = this.ctx.currentTime;
-    switch (type) {
-      case 'click':
-        this._playNote(800, now, 0.05, 'square');
-        break;
-      case 'typewriter':
-        this._playNote(600 + Math.random() * 200, now, 0.03, 'square');
-        break;
-      case 'fanfare':
-        this._playNote(NOTE_FREQS.C5, now, 0.15, 'square');
-        this._playNote(NOTE_FREQS.E5, now + 0.15, 0.15, 'square');
-        this._playNote(NOTE_FREQS.G5, now + 0.3, 0.15, 'square');
-        this._playNote(NOTE_FREQS.C6, now + 0.45, 0.4, 'square');
-        break;
-      case 'join':
-        this._playNote(NOTE_FREQS.G4, now, 0.12, 'square');
-        this._playNote(NOTE_FREQS.B4, now + 0.12, 0.12, 'square');
-        this._playNote(NOTE_FREQS.D5, now + 0.24, 0.12, 'square');
-        this._playNote(NOTE_FREQS.G5, now + 0.36, 0.3, 'square');
-        break;
-      case 'select':
-        this._playNote(NOTE_FREQS.E5, now, 0.08, 'square');
-        this._playNote(NOTE_FREQS.G5, now + 0.1, 0.15, 'square');
-        break;
-      case 'reveal':
-        for (let i = 0; i < 8; i++) {
-          const freq = NOTE_FREQS.C4 * Math.pow(2, i / 4);
-          this._playNote(freq, now + i * 0.1, 0.2, 'sine');
-        }
-        break;
-      case 'celebration':
-        const celebNotes = ['C5','E5','G5','C6','G5','E5','C5','E5','G5','C6'];
-        celebNotes.forEach((n, i) => {
-          this._playNote(NOTE_FREQS[n], now + i * 0.12, 0.15, 'square');
-        });
-        break;
+    try {
+      if (!this.initialized) this.init();
+      if (!this.ctx || this.muted) return;
+      this.resume();
+      const now = this.ctx.currentTime;
+      switch (type) {
+        case 'click':
+          this._playNote(800, now, 0.05, 'square');
+          break;
+        case 'typewriter':
+          this._playNote(600 + Math.random() * 200, now, 0.03, 'square');
+          break;
+        case 'fanfare':
+          this._playNote(NOTE_FREQS.C5, now, 0.15, 'square');
+          this._playNote(NOTE_FREQS.E5, now + 0.15, 0.15, 'square');
+          this._playNote(NOTE_FREQS.G5, now + 0.3, 0.15, 'square');
+          this._playNote(NOTE_FREQS.C6, now + 0.45, 0.4, 'square');
+          break;
+        case 'join':
+          this._playNote(NOTE_FREQS.G4, now, 0.12, 'square');
+          this._playNote(NOTE_FREQS.B4, now + 0.12, 0.12, 'square');
+          this._playNote(NOTE_FREQS.D5, now + 0.24, 0.12, 'square');
+          this._playNote(NOTE_FREQS.G5, now + 0.36, 0.3, 'square');
+          break;
+        case 'select':
+          this._playNote(NOTE_FREQS.E5, now, 0.08, 'square');
+          this._playNote(NOTE_FREQS.G5, now + 0.1, 0.15, 'square');
+          break;
+        case 'reveal':
+          for (let i = 0; i < 8; i++) {
+            const freq = NOTE_FREQS.C4 * Math.pow(2, i / 4);
+            this._playNote(freq, now + i * 0.1, 0.2, 'sine');
+          }
+          break;
+        case 'celebration':
+          const celebNotes = ['C5','E5','G5','C6','G5','E5','C5','E5','G5','C6'];
+          celebNotes.forEach((n, i) => {
+            this._playNote(NOTE_FREQS[n], now + i * 0.12, 0.15, 'square');
+          });
+          break;
+      }
+    } catch (e) {
+      console.warn('Error playing SFX:', e);
     }
   }
 
   toggleMute() {
-    this.muted = !this.muted;
-    if (this.masterGain) {
-      this.masterGain.gain.value = this.muted ? 0 : 0.15;
+    try {
+      this.muted = !this.muted;
+      if (this.masterGain) {
+        this.masterGain.gain.value = this.muted ? 0 : 0.15;
+      }
+      return this.muted;
+    } catch (e) {
+      console.warn('Error toggling mute:', e);
+      return this.muted;
     }
-    return this.muted;
   }
 
   fadeOut(duration = 1) {
-    if (!this.masterGain) return;
-    this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + duration);
-    setTimeout(() => {
-      this.stopMelody();
-      this.masterGain.gain.value = this.muted ? 0 : 0.15;
-    }, duration * 1000);
+    try {
+      if (!this.masterGain || !this.ctx) return;
+      this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + duration);
+      setTimeout(() => {
+        try {
+          this.stopMelody();
+          if (this.masterGain) {
+            this.masterGain.gain.value = this.muted ? 0 : 0.15;
+          }
+        } catch(e) {}
+      }, duration * 1000);
+    } catch (e) {
+      console.warn('Error in fadeOut:', e);
+    }
   }
 }
 

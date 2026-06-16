@@ -37,8 +37,7 @@ class Game {
 
     // ---- MOBILE ORIENTATION CHECK & LOCK ----
     const checkOrientation = () => {
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-        || window.innerWidth <= 1024;
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
       const isPortrait = window.innerHeight > window.innerWidth;
       const overlay = document.getElementById('orientation-overlay');
       if (overlay) {
@@ -131,6 +130,19 @@ class Game {
         handleA();
       }
     });
+
+    // Force layout reflow to prevent Chrome black screens on initial render
+    if (this.container) {
+      void this.container.offsetHeight;
+    }
+
+    // Force window resize dispatch after rendering to fix Chrome rendering layout freeze bug
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
 
     this.start();
   }

@@ -223,7 +223,10 @@ export class ChapterScene {
 
     // ---- SCENE SETUP ----
     container.classList.add(this.chapter.bgClass);
-    audio.playMelody('exploration');
+    // Desbloquea el AudioContext (requerido por móviles tras interacción de usuario)
+    audio.resume();
+    // Arranca la melodía propia del capítulo desde el principio
+    audio.playMelody(this.chapter.melody || 'exploration');
 
     // Scenery
     const scenery = createEl('div', 'chapter-scenery');
@@ -269,7 +272,7 @@ export class ChapterScene {
       
       if (member.imageUrl) {
         const img = createEl('img');
-        img.src = member.imageUrl + '?v=53';
+        img.src = member.imageUrl + '?v=51';
         img.style.height = 'clamp(80px, 22vh, 200px)';
         img.style.maxHeight = '200px';
         img.style.width = 'auto';
@@ -297,7 +300,7 @@ export class ChapterScene {
     let eventImageEl = null;
     if (this.chapter.image) {
       eventImageEl = createEl('img', 'chapter-event-image');
-      eventImageEl.src = this.chapter.image + '?v=53';
+      eventImageEl.src = this.chapter.image + '?v=51';
       eventImageEl.style.position = 'absolute';
       eventImageEl.style.top = '10%';
       eventImageEl.style.left = '15%';
@@ -341,7 +344,8 @@ export class ChapterScene {
       await fadeOut(partyArea, 300);
       partyArea.style.display = 'none';
 
-      // Play battle specific track
+      // Play battle specific track (ya está sonando la melodía del capítulo,
+      // sólo re-arrancamos por si hubo fadeOut previo)
       if (this.chapter.melody) {
         audio.playMelody(this.chapter.melody);
       }
