@@ -143,8 +143,6 @@ class BattleEngine {
     heroWrap.style.display = 'flex';
     heroWrap.style.flexDirection = 'column';
     heroWrap.style.alignItems = 'center';
-    heroWrap.classList.add('battle-floating');
-    heroWrap.id = 'battle-member-hero';
     
     playerSpriteWrap.appendChild(heroWrap);
 
@@ -185,10 +183,6 @@ class BattleEngine {
       memWrap.style.flexDirection = 'column';
       memWrap.style.alignItems = 'center';
       memWrap.style.justifyContent = 'flex-end';
-      memWrap.classList.add('battle-floating');
-      // Offset de animación para que no todos floten igual
-      memWrap.style.animationDelay = `${(playerSpriteWrap.children.length) * 0.3}s`;
-      memWrap.id = `battle-member-${member.id}`;
       
       playerSpriteWrap.appendChild(memWrap);
     });
@@ -258,8 +252,8 @@ class BattleEngine {
       this.updateHP('enemy');
       this.flashEntity('battle-enemy-entity');
     } else {
-      // Enemy attacks — flash EVERY party member individually
-      this.flashAllPartyMembers();
+      // Player takes damage (scripted, no actual HP tracking)
+      this.flashEntity('battle-player-entity');
     }
 
     await wait(500);
@@ -324,37 +318,6 @@ class BattleEngine {
       el.classList.remove('battle-hit');
       el.classList.add('battle-floating');
     }, 500);
-  }
-
-  flashAllPartyMembers() {
-    // Flash el hero
-    const heroEl = document.getElementById('battle-member-hero');
-    if (heroEl) {
-      heroEl.classList.remove('battle-floating');
-      heroEl.classList.add('battle-hit');
-      setTimeout(() => {
-        heroEl.classList.remove('battle-hit');
-        heroEl.classList.add('battle-floating');
-      }, 500);
-    }
-    // Flash cada miembro de la party por su id
-    if (this.party) {
-      this.party.forEach(member => {
-        const el = document.getElementById(`battle-member-${member.id}`);
-        if (el) {
-          // Delay escalonado para efecto en cascada
-          const delay = Math.random() * 80;
-          setTimeout(() => {
-            el.classList.remove('battle-floating');
-            el.classList.add('battle-hit');
-            setTimeout(() => {
-              el.classList.remove('battle-hit');
-              el.classList.add('battle-floating');
-            }, 500);
-          }, delay);
-        }
-      });
-    }
   }
 
   async endBattle() {

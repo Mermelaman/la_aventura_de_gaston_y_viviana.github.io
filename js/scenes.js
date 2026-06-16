@@ -223,10 +223,7 @@ export class ChapterScene {
 
     // ---- SCENE SETUP ----
     container.classList.add(this.chapter.bgClass);
-    // Desbloquea el AudioContext (requerido por móviles tras interacción de usuario)
-    audio.resume();
-    // Arranca la melodía propia del capítulo desde el principio
-    audio.playMelody(this.chapter.melody || 'exploration');
+    audio.playMelody('exploration');
 
     // Scenery
     const scenery = createEl('div', 'chapter-scenery');
@@ -344,8 +341,7 @@ export class ChapterScene {
       await fadeOut(partyArea, 300);
       partyArea.style.display = 'none';
 
-      // Play battle specific track (ya está sonando la melodía del capítulo,
-      // sólo re-arrancamos por si hubo fadeOut previo)
+      // Play battle specific track
       if (this.chapter.melody) {
         audio.playMelody(this.chapter.melody);
       }

@@ -12,12 +12,6 @@
   --text-dim: #b2bec3;
   --font-pixel: 'Press Start 2P', monospace;
   --font-elegant: 'Playfair Display', serif;
-  /* Tamaño del botón A — mismo clamp que .game-btn width/height */
-  --btn-size: clamp(80px, 22vmin, 130px);
-  /* Offset del botón desde el borde derecho */
-  --btn-right: 12px;
-  /* Margen total que debe respetar el cuadro de diálogo */
-  --dialogue-margin-right: calc(var(--btn-size) + var(--btn-right) + 8px);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -177,7 +171,7 @@ html, body {
   position: relative;
   flex: 1;
   margin: 6px;
-  margin-right: var(--dialogue-margin-right);
+  margin-right: clamp(120px, 28vmin, 180px);
   background: linear-gradient(180deg, rgba(10,10,40,0.95), rgba(20,10,50,0.98));
   border: 2px solid var(--gold);
   border-radius: 10px;
@@ -513,37 +507,28 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  /* gap proporcional al ancho Y alto para evitar solapamientos */
-  gap: clamp(20px, 4vmin, 56px);
+  gap: clamp(16px, 5vw, 60px);
   position: absolute;
   bottom: clamp(4px, 2vh, 40px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  /* Evita que el grupo se salga de pantalla */
-  max-width: 100vw;
-  padding: 0 clamp(8px, 2vw, 24px);
-  box-sizing: border-box;
 }
 
 .party-member-scene {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  /* +25% respecto al tamaño anterior, usando vmin para relación aspecto */
-  width: clamp(72px, 20vmin, 175px);
-  height: clamp(96px, 31vmin, 250px);
+  width: clamp(60px, 16vh, 140px);
+  height: clamp(80px, 25vh, 200px);
   position: relative;
-  flex-shrink: 0;
 }
 
 .party-member-scene img {
   flex-shrink: 0;
   pointer-events: none;
   max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
-  display: block;
 }
 
 .party-member-scene canvas { image-rendering: pixelated; }
@@ -1068,9 +1053,9 @@ html, body {
 @media (max-height: 600px) {
   #controls-area { min-height: 70px; max-height: 22vh; }
   .game-btn { width: 48px; height: 48px; font-size: 16px; }
-  #dialogue-box { margin: 4px; margin-right: calc(clamp(48px, 14vmin, 80px) + 12px + 8px); padding: 6px 8px; }
-  .chapter-party { bottom: 2px; gap: clamp(10px, 3vmin, 20px); }
-  .party-member-scene { height: clamp(72px, 25vmin, 190px); width: clamp(52px, 16vmin, 130px); }
+  #dialogue-box { margin: 4px; margin-right: clamp(56px, 14vmin, 80px); padding: 6px 8px; }
+  .chapter-party { bottom: 2px; gap: clamp(8px, 3vw, 20px); }
+  .party-member-scene { height: clamp(60px, 20vh, 150px); width: clamp(40px, 12vh, 100px); }
   .invitation-card { max-height: 85vh; padding: 10px 8px; }
   .rsvp-question { font-size: clamp(16px, 4vw, 24px); margin-bottom: 12px; }
   .rsvp-party-emoji { font-size: 32px; margin-bottom: 16px; }
