@@ -6,6 +6,7 @@ import { audio } from './audio.js';
 import { dialogue } from './dialogue.js';
 import { renderSprite } from './sprites.js';
 import { ENEMY_SPRITES } from './characters.js';
+import { getLayoutScale } from './config.js';
 
 function createEl(tag, className, text) {
   const el = document.createElement(tag);
@@ -58,6 +59,13 @@ class BattleEngine {
     const enemyEntity = createEl('div', 'battle-entity battle-enemy battle-floating');
     enemyEntity.id = 'battle-enemy-entity';
 
+    const scale = getLayoutScale();
+
+    // Use height instead of width for enemy (enlarged by 20% + screen resolution scale)
+    const enemyMinHeight = Math.round(96 * scale);
+    const enemyVhHeight = (26 * scale).toFixed(1);
+    const enemyMaxHeight = Math.round(216 * scale);
+
     const enemySpriteWrap = createEl('div', 'battle-sprite');
     const spriteData = ENEMY_SPRITES[enemy.spriteId];
     if (enemy.imageUrl) {
@@ -66,9 +74,8 @@ class BattleEngine {
         img.classList.add('cerezo-boss');
       }
       img.src = enemy.imageUrl + '?v=53';
-      // Use height instead of width for enemy (enlarged by 20%)
-      img.style.height = 'clamp(96px, 26vh, 216px)';
-      img.style.maxHeight = '216px';
+      img.style.height = `clamp(${enemyMinHeight}px, ${enemyVhHeight}vh, ${enemyMaxHeight}px)`;
+      img.style.maxHeight = `${enemyMaxHeight}px`;
       img.style.width = 'auto';
       img.style.transformOrigin = 'bottom center';
       if (enemy.flip) {
@@ -76,7 +83,7 @@ class BattleEngine {
       }
       enemySpriteWrap.appendChild(img);
     } else if (spriteData) {
-      const canvas = renderSprite(spriteData.idle, spriteData.palette, 4.3);
+      const canvas = renderSprite(spriteData.idle, spriteData.palette, 4.3 * scale);
       enemySpriteWrap.appendChild(canvas);
     } else {
       // Use placeholder
@@ -109,22 +116,25 @@ class BattleEngine {
     playerSpriteWrap.style.gap = '4px';
     playerSpriteWrap.style.alignItems = 'flex-end';
 
+    const charMinHeight = Math.round(84 * scale);
+    const charVhHeight = (21.6 * scale).toFixed(1);
+    const charMaxHeight = Math.round(180 * scale);
+
     // Hero
     const heroWrap = createEl('div', 'battle-sprite');
     heroWrap.id = `battle-char-${hero.id}`;
     if (hero && hero.imageUrl) {
       const img = createEl('img', 'battle-image');
       img.src = hero.imageUrl + '?v=53';
-      // Use height instead of width so aspect ratio doesn't distort relative sizes (enlarged by 20%)
-      img.style.height = 'clamp(84px, 21.6vh, 180px)';
-      img.style.maxHeight = '180px';
+      img.style.height = `clamp(${charMinHeight}px, ${charVhHeight}vh, ${charMaxHeight}px)`;
+      img.style.maxHeight = `${charMaxHeight}px`;
       img.style.width = 'auto';
       img.style.transformOrigin = 'bottom center';
       const hScale = hero.scale || 1;
       img.style.transform = `scale(${-hScale}, ${hScale})`;
       heroWrap.appendChild(img);
     } else if (hero && hero.sprite) {
-      const canvas = renderSprite(hero.sprite.idle, hero.sprite.palette, 3.6);
+      const canvas = renderSprite(hero.sprite.idle, hero.sprite.palette, 3.6 * scale);
       heroWrap.appendChild(canvas);
     } else {
       const ph = createEl('div', 'placeholder-sprite ph-player');
@@ -155,15 +165,15 @@ class BattleEngine {
       if (member.imageUrl) {
         const img = createEl('img', 'battle-image');
         img.src = member.imageUrl + '?v=53';
-        img.style.height = 'clamp(84px, 21.6vh, 180px)';
-        img.style.maxHeight = '180px';
+        img.style.height = `clamp(${charMinHeight}px, ${charVhHeight}vh, ${charMaxHeight}px)`;
+        img.style.maxHeight = `${charMaxHeight}px`;
         img.style.width = 'auto';
         img.style.transformOrigin = 'bottom center';
         const mScale = member.scale || 1;
         img.style.transform = `scale(${-mScale}, ${mScale})`;
         memWrap.appendChild(img);
       } else if (member.sprite) {
-        const canvas = renderSprite(member.sprite.idle, member.sprite.palette, 6);
+        const canvas = renderSprite(member.sprite.idle, member.sprite.palette, 6 * scale);
         memWrap.appendChild(canvas);
       } else {
         const ph = createEl('div', 'placeholder-sprite ph-player');

@@ -39,3 +39,12 @@ export const CONFIG = {
     dark: '#0a0a1a',
   },
 };
+
+export function getLayoutScale() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  // Base reference size is 1024x576 (ideal landscape aspect ratio)
+  const scaleRef = Math.min(width / 1024, height / 576);
+  // Return clamped scale factor between 0.55 and 1.35
+  return Math.max(0.55, Math.min(1.35, scaleRef));
+}

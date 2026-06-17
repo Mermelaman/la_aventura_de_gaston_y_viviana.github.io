@@ -2,7 +2,7 @@
 // GAME SCENES — All scene definitions
 // ============================================
 
-import { CONFIG } from './config.js';
+import { CONFIG, getLayoutScale } from './config.js';
 import { audio } from './audio.js';
 import { particles } from './particles.js';
 import { dialogue } from './dialogue.js';
@@ -254,6 +254,8 @@ export class ChapterScene {
       return orderA - orderB;
     });
 
+    const layoutScale = getLayoutScale();
+
     // Dynamic height and scale factor based on the number of active party members:
     let maxHeight = 200;
     let vhHeight = 22;
@@ -276,6 +278,10 @@ export class ChapterScene {
       vhHeight = 14;
       canvasFactor = 3;
     }
+
+    maxHeight = Math.round(maxHeight * layoutScale);
+    vhHeight = vhHeight * layoutScale;
+    canvasFactor = canvasFactor * layoutScale;
 
     for (const member of activeMembers) {
       const memberDiv = createEl('div', 'party-member-scene');

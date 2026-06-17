@@ -230,8 +230,8 @@ export const STORY = {
       resolutionDialogues: [
         { name: 'Narrador', text: 'Lucharon los cuatro con todas sus fuerzas y lograron obtener los fragmentos.', portrait: '📖', color: '#a29bfe' },
         { name: 'Narrador', text: '¡Los fragmentos conformaron una nueva orbe y vencieron al Yeti!', portrait: '📖', color: '#a29bfe' },
-        { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdo una aventura congelada (y no es frozen)', portrait: '🔮', color: '#0984e3' },
-        { name: 'Orbe de Recuerdos', text: '✨ Una aventura congelada (y no es frozen) ✨', portrait: '✨', color: '#74b9ff', textColor: '#74b9ff' }
+        { name: 'Narrador', text: 'Obtuvieron: Orbe de buenos recuerdos', portrait: '🔮', color: '#0984e3' },
+        { name: 'Orbe de Recuerdos', text: '✨ no es Frozen ✨', portrait: '✨', color: '#74b9ff', textColor: '#74b9ff' }
       ],
       allyIndex: null,
       allyDialogues: null
@@ -317,7 +317,7 @@ export const STORY = {
         { turn: 'player', text: '¡Le ofrecen el Orbe de Dulce Recompensa: Magia y nueva vida!', damage: 15 },
         { turn: 'player', text: '¡Le ofrecen el Orbe de Camino a Tabla\'Dah: Que bueno es comer juntos!', damage: 15 },
         { turn: 'player', text: '¡Le ofrecen el Orbe de Amor Amarillo: Bienvenida, ahora si estamos todos!', damage: 15 },
-        { turn: 'player', text: '¡Le ofrecen el Orbe de buenos recuerdo una aventura congelada (y no es frozen): Una aventura congelada (y no es frozen)!', damage: 15 },
+        { turn: 'player', text: '¡Le ofrecen el Orbe de Aventura Congelada: no es Frozen!', damage: 15 },
         { turn: 'player', text: '¡Le ofrecen el Orbe del Rey Gato: Miau miau miau!', damage: 15 },
         { turn: 'player', text: '¡Le ofrecen el Orbe de Mensaje de la Luna: La luna llena y la propuesta!', damage: 15 }
       ],
